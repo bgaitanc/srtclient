@@ -10,19 +10,19 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
-  const { login } = useAuth(); // Obtenemos la función de login del hook
+  const { login } = useAuth();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setError('');
 
-    // Simulación de autenticación
+    // dummy authentication logic
     if (username === 'user' && password === 'password') {
-      // En una app real, aquí harías una llamada a tu API de autenticación
-      // y guardarías el token recibido.
+      // in a real app, we will call our authentication API here
+      // and store the received token.
       const fakeToken = 'your-super-secret-auth-token-123';
-      login(fakeToken); // Llama a la función de login del hook
-      navigate('/dashboard'); // Redirige al dashboard después del login exitoso
+      login(fakeToken);
+      navigate('/dashboard');
     } else {
       setError('Credenciales inválidas. Inténtalo de nuevo.');
     }
