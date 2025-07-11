@@ -11,12 +11,10 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // simulation of authentication
     const checkAuth = () => {
       const token = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
       if (token) {
-        // Validar token con backend si es necesario
-        // api call to validate token can be added here
+        // Validar token con backend
         dispatch(setAuth(true));
       } else {
         dispatch(setAuth(false));
@@ -27,9 +25,6 @@ export const useAuth = () => {
     checkAuth();
   }, [dispatch]);
 
-  // Aquí podrías añadir funciones para login y logout
-  // Por ejemplo, podrías hacer una llamada a la API para autenticar al usuario
-  // y luego guardar el token en localStorage y actualizar el estado de autenticación.
   const login = (token: string) => {
     localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
     dispatch(setAuth(true));
@@ -40,5 +35,10 @@ export const useAuth = () => {
     dispatch(logoutAction());
   };
 
-  return { isAuthenticated: authState.isAuthenticated, isLoading, login, logout };
+  return {
+    isAuthenticated: authState.isAuthenticated,
+    isLoading,
+    login,
+    logout,
+  };
 };

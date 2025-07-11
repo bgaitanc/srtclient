@@ -11,22 +11,22 @@ const AppRoutes: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rutas Públicas */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
-          {/* Otras rutas públicas si las tienes */}
         </Route>
 
-        {/* Rutas Protegidas */}
         <Route path="/dashboard" element={<ProtectedRoute />}>
-          <Route index element={<MainLayout><DashboardPage /></MainLayout>} />
-          {/* Aquí puedes anidar más rutas protegidas si deseas */}
-          {/* Por ejemplo: */}
-          {/* <Route path="bookings" element={<MainLayout><BookingsPage /></MainLayout>} /> */}
+          <Route
+            index
+            element={
+              <MainLayout>
+                <DashboardPage />
+              </MainLayout>
+            }
+          />
         </Route>
 
-        {/* Ruta Catch-all para 404 */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
