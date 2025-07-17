@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '@hooks/useAuth.ts';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import Button from '@components/Button/Button';
 
 const DashboardPage: React.FC = () => {
   const { logout } = useAuth();
