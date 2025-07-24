@@ -32,7 +32,8 @@
       "@schemas/*": ["shared/validationSchemas/*"],
       "@services/*": ["shared/services/*"],
       "@store/*": ["store/*"],
-      "@utils/*": ["shared/utils/*"]
+      "@utils/*": ["shared/utils/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "include": ["src"]
