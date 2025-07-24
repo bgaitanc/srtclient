@@ -73,49 +73,62 @@ const LoginPage: React.FC = () => {
   }, [isLoginError, loginError]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      {isLoginLoading && <CircularLoading show={isLoginLoading} />}
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Iniciar Sesión
-        </h2>
-        <form onSubmit={formik.handleSubmit}>
-          <div className="mb-4">
-            <InputField
-              id="username"
-              name="username"
-              // TODO los labels deberían de centralizarse, i18n?
-              label="Usuario"
-              value={formik.values.username}
-              onChange={formik.handleChange}
-              error={formik.touched.username && Boolean(formik.errors.username)}
-              onBlur={formik.handleBlur}
-              helperText={
-                formik.touched.username && Boolean(formik.errors.username)
-                  ? String(formik.errors.username)
-                  : ''
-              }
-            />
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300">
+      <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md mx-auto">
+        <div className="flex flex-col items-center mb-6">
+          <div className="bg-blue-100 rounded-full p-3 mb-2">
+            <svg
+              className="w-8 h-8 text-blue-600"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
           </div>
-          <div className="mb-6">
-            <InputField
-              id="password"
-              name="password"
-              label="Contraseña"
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              onBlur={formik.handleBlur}
-              helperText={
-                formik.touched.password && Boolean(formik.errors.password)
-                  ? String(formik.errors.password)
-                  : ''
-              }
-            />
-          </div>
+          <h2 className="text-3xl font-bold text-gray-800">Iniciar Sesión</h2>
+          <p className="text-gray-500 text-sm mt-1">
+            Accede con tu usuario y contraseña
+          </p>
+        </div>
+        {isLoginLoading && <CircularLoading show={isLoginLoading} />}
+        <form onSubmit={formik.handleSubmit} className="space-y-4">
+          <InputField
+            id="username"
+            name="username"
+            label="Usuario"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            error={formik.touched.username && Boolean(formik.errors.username)}
+            onBlur={formik.handleBlur}
+            helperText={
+              formik.touched.username && Boolean(formik.errors.username)
+                ? String(formik.errors.username)
+                : ''
+            }
+          />
+          <InputField
+            id="password"
+            name="password"
+            label="Contraseña"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            onBlur={formik.handleBlur}
+            helperText={
+              formik.touched.password && Boolean(formik.errors.password)
+                ? String(formik.errors.password)
+                : ''
+            }
+          />
           {error && (
-            <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+            <p className="text-red-500 text-sm text-center mt-2">{error}</p>
           )}
           <Button
             type="submit"
@@ -126,12 +139,17 @@ const LoginPage: React.FC = () => {
             Entrar
           </Button>
         </form>
-        <p className="text-center text-gray-600 text-sm mt-6">
-          ¿No tienes cuenta?{' '}
-          <Link to="/register" className="text-blue-600 hover:underline">
-            Regístrate aquí
-          </Link>
-        </p>
+        <div className="text-center mt-6">
+          <span className="text-gray-600 text-sm">
+            ¿No tienes cuenta?{' '}
+            <Link
+              to="/register"
+              className="text-blue-600 hover:underline font-semibold"
+            >
+              Regístrate aquí
+            </Link>
+          </span>
+        </div>
       </div>
     </div>
   );
