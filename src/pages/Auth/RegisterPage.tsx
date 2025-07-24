@@ -30,9 +30,9 @@ const RegisterPage: React.FC = () => {
     { id: 'name', label: 'Nombre', name: 'name', grid: true },
     { id: 'lastName', label: 'Apellido', name: 'lastName', grid: true },
     { id: 'username', label: 'Usuario', name: 'username' },
+    { id: 'password', label: 'Contraseña', name: 'password', type: 'password' },
     { id: 'email', label: 'Correo electrónico', name: 'email' },
     { id: 'phone', label: 'Teléfono', name: 'phone' },
-    { id: 'password', label: 'Contraseña', name: 'password', type: 'password' },
   ];
   const formik = useFormik<UserRegisterValues>({
     initialValues,
@@ -42,14 +42,14 @@ const RegisterPage: React.FC = () => {
     onSubmit: async (values, { resetForm }) => {
       const errors = showRequiredFieldToasts<UserRegisterValues>(
         values,
-        ['name', 'lastName', 'username', 'email', 'phone', 'password'],
+        ['name', 'lastName', 'username', 'password', 'email', 'phone'],
         {
           name: 'Nombre',
           lastName: 'Apellido',
           username: 'Usuario',
+          password: 'Contraseña',
           email: 'Correo electrónico',
           phone: 'Teléfono',
-          password: 'Contraseña',
         }
       );
       if (Object.keys(errors).length > 0) {
@@ -86,7 +86,7 @@ const RegisterPage: React.FC = () => {
           formik={formik}
           buttonText="Registrarse"
           loading={isLoading}
-          gridCols="grid-cols-1 md:grid-cols-2"
+          gridCols="grid-cols-1 md:grid-cols-1"
           successMessage={isSuccess && (
             <div className="mb-4 text-center">
               <span className="text-green-600 font-semibold">
