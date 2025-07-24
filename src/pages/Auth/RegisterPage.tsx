@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import InputField from '@components/Input/InputField';
 import Button from '@mui/material/Button';
@@ -6,9 +7,12 @@ import userRegisterSchema from '@schemas/userRegister.schema';
 import type { UserRegisterValues } from '@models/formik/UserRegisterValues';
 import CircularLoading from '@components/Loading/CircularLoading.tsx';
 import { useRegisterUser } from '@hooks/useRegisterUser';
+import AuthFormCard from '@components/Auth/AuthFormCard';
+import { showRequiredFieldToasts } from '@utils/formToastErrors';
+import { Link } from 'react-router-dom';
 
 const RegisterPage: React.FC = () => {
-  const { registerUser, isLoading, error, isSuccess } = useRegisterUser();
+  const { registerUser, isLoading, isSuccess } = useRegisterUser();
 
   const initialValues = useMemo<UserRegisterValues>(
     () => ({
@@ -28,6 +32,21 @@ const RegisterPage: React.FC = () => {
     validateOnChange: true,
     enableReinitialize: true,
     onSubmit: async (values, { resetForm }) => {
+      const errors = showRequiredFieldToasts<UserRegisterValues>(
+        values,
+        ['name', 'lastName', 'username', 'email', 'phone', 'password'],
+        {
+          name: 'Nombre',
+          lastName: 'Apellido',
+          username: 'Usuario',
+          email: 'Correo electrónico',
+          phone: 'Teléfono',
+          password: 'Contraseña',
+        }
+      );
+      if (Object.keys(errors).length > 0) {
+        return;
+      }
       const registerPayload = {
         nombres: values.name,
         apellidos: values.lastName,
@@ -40,35 +59,34 @@ const RegisterPage: React.FC = () => {
         await registerUser(registerPayload);
         resetForm();
       } catch (err) {
-        // El error se maneja en el hook
+        toast.error('Ocurrió un error inesperado.', { duration: 3000 });
       }
     },
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300">
-      <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-lg mx-auto">
-        <div className="flex flex-col items-center mb-6">
-          <div className="bg-blue-100 rounded-full p-3 mb-2">
-            <svg
-              className="w-8 h-8 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-          </div>
-          <h2 className="text-3xl font-bold text-gray-800">Crear cuenta</h2>
-          <p className="text-gray-500 text-sm mt-1">
-            Completa tus datos para registrarte
-          </p>
-        </div>
+    <>
+      <Toaster position="top-right" />
+      <AuthFormCard
+        title="Crear cuenta"
+        subtitle="Completa tus datos para registrarte"
+        icon={
+          <svg
+            className="w-8 h-8 text-blue-600"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+        }
+        maxWidth="max-w-lg"
+      >
         {isSuccess && (
           <div className="mb-4 text-center">
             <span className="text-green-600 font-semibold">
@@ -172,24 +190,21 @@ const RegisterPage: React.FC = () => {
           >
             {isLoading ? <CircularLoading show={true} /> : 'Registrarse'}
           </Button>
-          {error && (
-            <p className="text-red-500 text-sm text-center mt-2">{error}</p>
-          )}
         </form>
         <div className="text-center mt-6">
           <span className="text-gray-600 text-sm">
             ¿Ya tienes cuenta?{' '}
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="text-blue-600 hover:underline font-semibold"
             >
               Inicia sesión
-            </a>
+            </Link>
           </span>
         </div>
-      </div>
-    </div>
+      </AuthFormCard>
+    </>
   );
-};
+}
 
 export default RegisterPage;

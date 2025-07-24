@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@hooks/useAuth';
 import { Link } from 'react-router-dom';
@@ -10,9 +11,10 @@ import userLoginSchema from '@schemas/userLogin.schema';
 import { useLoginMutation } from '@services/authentication.service.ts';
 import type { UserLoginReq } from '@models/authentication.ts';
 import CircularLoading from '@components/Loading/CircularLoading.tsx';
+import AuthFormCard from '@components/Auth/AuthFormCard';
+import { showRequiredFieldToasts } from '@utils/formToastErrors';
 
 const LoginPage: React.FC = () => {
-  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -41,8 +43,15 @@ const LoginPage: React.FC = () => {
     validateOnChange: true,
     enableReinitialize: true,
     onSubmit: async (values) => {
+      const errors = showRequiredFieldToasts<UserLoginValues>(
+        values,
+        ['username', 'password'],
+        { username: 'Usuario', password: 'Contraseña' }
+      );
+      if (Object.keys(errors).length > 0) {
+        return;
+      }
       try {
-        setError('');
         const request: UserLoginReq = {
           user: values.username,
           password: values.password,
@@ -50,7 +59,7 @@ const LoginPage: React.FC = () => {
         await loginAction(request);
       } catch (err) {
         console.error('Login ERROR:', err);
-        setError('Ocurrió un error inesperado.');
+        toast.error('Ocurrió un error inesperado.', { duration: 3000 });
       }
     },
   });
@@ -65,37 +74,35 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (isLoginError && loginError) {
       if ('data' in loginError) {
-        setError(String(loginError.data));
+        toast.error(String(loginError.data), { duration: 3000 });
       } else {
-        setError('Ocurrió un error inesperado.');
+        toast.error('Ocurrió un error inesperado.', { duration: 3000 });
       }
     }
   }, [isLoginError, loginError]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300">
-      <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md mx-auto">
-        <div className="flex flex-col items-center mb-6">
-          <div className="bg-blue-100 rounded-full p-3 mb-2">
-            <svg
-              className="w-8 h-8 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-          </div>
-          <h2 className="text-3xl font-bold text-gray-800">Iniciar Sesión</h2>
-          <p className="text-gray-500 text-sm mt-1">
-            Accede con tu usuario y contraseña
-          </p>
-        </div>
+    <>
+      <Toaster position="top-right" />
+      <AuthFormCard
+        title="Iniciar Sesión"
+        subtitle="Accede con tu usuario y contraseña"
+        icon={
+          <svg
+            className="w-8 h-8 text-blue-600"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+        }
+      >
         {isLoginLoading && <CircularLoading show={isLoginLoading} />}
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <InputField
@@ -107,7 +114,7 @@ const LoginPage: React.FC = () => {
             error={formik.touched.username && Boolean(formik.errors.username)}
             onBlur={formik.handleBlur}
             helperText={
-              formik.touched.username && Boolean(formik.errors.username)
+              formik.touched.username && formik.errors.username
                 ? String(formik.errors.username)
                 : ''
             }
@@ -122,14 +129,11 @@ const LoginPage: React.FC = () => {
             error={formik.touched.password && Boolean(formik.errors.password)}
             onBlur={formik.handleBlur}
             helperText={
-              formik.touched.password && Boolean(formik.errors.password)
+              formik.touched.password && formik.errors.password
                 ? String(formik.errors.password)
                 : ''
             }
           />
-          {error && (
-            <p className="text-red-500 text-sm text-center mt-2">{error}</p>
-          )}
           <Button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition duration-300"
@@ -150,9 +154,9 @@ const LoginPage: React.FC = () => {
             </Link>
           </span>
         </div>
-      </div>
-    </div>
+      </AuthFormCard>
+    </>
   );
-};
+}
 
 export default LoginPage;
