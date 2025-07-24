@@ -1,3 +1,38 @@
+# Estructura del Proyecto
+
+```text
+src/
+  components/
+    Auth/                # Componentes de autenticación (formularios, iconos)
+    Input/               # Campos de entrada reutilizables
+    Loading/             # Indicadores de carga
+  pages/
+    Auth/                # Páginas de login y registro
+    Dashboard/           # Página principal tras login
+    Home/                # Página de inicio
+    NotFound/            # Página de error 404
+  hooks/                 # Hooks personalizados (auth, registro, etc)
+  shared/
+    models/              # Modelos y tipos para datos y formularios
+    services/            # Funciones para llamadas a APIs/endpoints
+    validationSchemas/   # Esquemas Yup para validación de formularios
+    utils/               # Utilidades generales (ej: manejo de token, toasts)
+  store/                 # Redux store y slices
+  routes/                # Definición de rutas y rutas protegidas
+  config/                # Constantes y configuración global
+  assets/
+    icons/               # Iconos SVG
+    images/              # Imágenes y logos
+public/                  # Archivos públicos y estáticos
+vite.config.ts           # Configuración de Vite y alias
+tsconfig*.json           # Configuración de TypeScript y paths
+eslint.config.js         # Configuración de ESLint
+prettier.config.cjs      # Configuración de Prettier
+README.md                # Documentación del proyecto
+```
+
+Cada carpeta y archivo está organizado para separar la lógica de negocio, componentes visuales, configuración y utilidades, facilitando el mantenimiento y escalabilidad del proyecto.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
