@@ -48,7 +48,8 @@ const LoginPage: React.FC = () => {
           password: values.password,
         };
         await loginAction(request);
-      } catch {
+      } catch (err) {
+        console.error('Login ERROR:', err);
         setError('Ocurrió un error inesperado.');
       }
     },

@@ -12,6 +12,7 @@ export const authenticationApi = createApi({
   reducerPath: 'authenticationApi',
   baseQuery: fetchBaseQuery({
     baseUrl: API_BASE_URL,
+    credentials: 'include',
     prepareHeaders: (headers) => {
       headers.set('Content-Type', 'application/json');
       return headers;

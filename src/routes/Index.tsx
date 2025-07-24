@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/Home/HomePage';
 import LoginPage from '../pages/Auth/LoginPage';
+import RegisterPage from '../pages/Auth/RegisterPage';
 import DashboardPage from '../pages/Dashboard/DashboardPage';
 import NotFoundPage from '../pages/NotFound/NotFoundPage';
 import ProtectedRoute from './ProtectedRoute';
@@ -14,6 +15,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
         </Route>
 
         <Route path="/dashboard" element={<ProtectedRoute />}>

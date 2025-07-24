@@ -5,6 +5,9 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    port: Number(process.env.VITE_PORT) || 3000,
+  },
   resolve: {
     alias: {
       '@config': path.resolve(__dirname, './src/config'),
