@@ -1,6 +1,6 @@
 export type UserLoginReq = {
-  user: string;
-  password: string;
+  User: string;
+  Password: string;
 };
 
 export type UserLoginRes = {

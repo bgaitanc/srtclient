@@ -7,6 +7,7 @@ import DashboardPage from '../pages/Dashboard/DashboardPage';
 import NotFoundPage from '../pages/NotFound/NotFoundPage';
 import ProtectedRoute from './ProtectedRoute';
 import MainLayout from '../components/Layout/MainLayout';
+import RoutesPage from '../pages/Routes/RoutesPage';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes: React.FC = () => {
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route path="routes" element={<ProtectedRoute><RoutesPage /></ProtectedRoute>} />
         </Route>
 
         <Route path="/dashboard" element={<ProtectedRoute />}>

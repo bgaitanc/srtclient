@@ -56,8 +56,8 @@ const LoginPage: React.FC = () => {
       }
       try {
         const request: UserLoginReq = {
-          user: values.username,
-          password: values.password,
+          User: values.username,
+          Password: values.password,
         };
         await loginAction(request);
       } catch (err) {

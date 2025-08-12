@@ -9,7 +9,7 @@ interface AuthFormCardProps {
 }
 
 const AuthFormCard: React.FC<AuthFormCardProps> = ({ children, title, subtitle, icon, maxWidth = 'max-w-md' }) => (
-  <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-blue-300">
+  <div className="flex items-center justify-center min-h-screen">
     <div className={`bg-white shadow-xl rounded-xl p-8 w-full ${maxWidth} mx-auto`}>
       <div className="flex flex-col items-center mb-6">
         <div className="bg-blue-100 rounded-full p-3 mb-2">

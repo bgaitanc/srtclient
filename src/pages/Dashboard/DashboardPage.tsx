@@ -13,7 +13,7 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen text-center">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           Bienvenido al Dashboard

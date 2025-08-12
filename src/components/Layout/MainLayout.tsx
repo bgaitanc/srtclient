@@ -9,7 +9,7 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-200">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         {children || <Outlet />}
