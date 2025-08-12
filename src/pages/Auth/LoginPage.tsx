@@ -68,7 +68,7 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (isLoginSuccess && loginData) {
-      login(loginData.token);
+      login(loginData.data.token);
       navigate('/dashboard');
     }
   }, [isLoginSuccess, loginData]);
@@ -76,7 +76,9 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (isLoginError && loginError) {
       if ('data' in loginError) {
-        toast.error(String(loginError.data), { duration: 3000 });
+        // TODO tipar error para eliminar ts-ignore
+        // @ts-ignore
+        toast.error(String(loginError.data.message), { duration: 3000 });
       } else {
         toast.error('Ocurrió un error inesperado.', { duration: 3000 });
       }

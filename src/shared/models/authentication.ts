@@ -4,8 +4,6 @@ export type UserLoginReq = {
 };
 
 export type UserLoginRes = {
-  id: string;
-  username: string;
   token: string;
 };
 
@@ -21,6 +19,4 @@ export type UserRegisterReq = {
 export type UserRegisterRes = {
   userId: string;
   username: string;
-  //TODO para loguear después de crear el usuario?
-  token?: string;
 };

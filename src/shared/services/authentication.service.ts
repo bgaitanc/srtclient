@@ -7,6 +7,7 @@ import type {
   UserRegisterReq,
   UserRegisterRes,
 } from '@models/authentication.ts';
+import type { SrtResponse } from '../types/srtApi.types.ts';
 
 export const authenticationApi = createApi({
   reducerPath: 'authenticationApi',
@@ -19,14 +20,14 @@ export const authenticationApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    login: builder.mutation<UserLoginRes, UserLoginReq>({
+    login: builder.mutation<SrtResponse<UserLoginRes>, UserLoginReq>({
       query: (body) => ({
         url: '/Authentication/login',
         method: 'POST',
         body,
       }),
     }),
-    register: builder.mutation<UserRegisterRes, UserRegisterReq>({
+    register: builder.mutation<SrtResponse<UserRegisterRes>, UserRegisterReq>({
       query: (body) => ({
         url: '/Users/register',
         method: 'POST',

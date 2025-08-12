@@ -17,17 +17,22 @@ export interface RouteDetailModalProps {
 }
 
 export interface RouteFormModalProps {
-  initialData?: {
-    rutaId?: number;
-    locacionOrigenId?: number;
-    locacionOrigenNombre?: string;
-    locacionDestinoId?: number;
-    locacionDestinoNombre?: string;
-    distanciaKm?: number;
-    tiempoEstimado?: string;
-  };
+  initialData?: Route;
   onSubmit: (data: any) => void;
   onClose: () => void;
   loading?: boolean;
   isEdit?: boolean;
 }
+
+export type Route = {
+  rutaId?: number;
+  locacionOrigenId?: number;
+  locacionOrigenNombre?: string;
+  locacionDestinoId?: number;
+  locacionDestinoNombre?: string;
+  distanciaKm?: number;
+  tiempoEstimado?: string;
+}
+
+export type CreateRouteReq = Omit<Route, 'rutaId' | 'locacionDestinoNombre' | 'locacionOrigenNombre'>;
+export type UpdateRouteReq = CreateRouteReq & { rutaId: number };
