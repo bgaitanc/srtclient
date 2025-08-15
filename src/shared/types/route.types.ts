@@ -25,13 +25,13 @@ export interface RouteFormModalProps {
 }
 
 export type Route = {
-  rutaId?: number;
-  locacionOrigenId?: number;
-  locacionOrigenNombre?: string;
-  locacionDestinoId?: number;
-  locacionDestinoNombre?: string;
-  distanciaKm?: number;
-  tiempoEstimado?: string;
+  rutaId: number;
+  locacionOrigenId: number;
+  locacionOrigenNombre: string;
+  locacionDestinoId: number;
+  locacionDestinoNombre: string;
+  distanciaKm: number;
+  tiempoEstimado: string;
 }
 
 export type CreateRouteReq = Omit<Route, 'rutaId' | 'locacionDestinoNombre' | 'locacionOrigenNombre'>;

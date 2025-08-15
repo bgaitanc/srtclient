@@ -60,7 +60,7 @@ const LoginPage: React.FC = () => {
           Password: values.password,
         };
         await loginAction(request);
-      } catch (err) {
+      } catch {
         toast.error('Ocurrió un error inesperado.', { duration: 3000 });
       }
     },
@@ -75,10 +75,8 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (isLoginError && loginError) {
-      if ('data' in loginError) {
-        // TODO tipar error para eliminar ts-ignore
-        // @ts-ignore
-        toast.error(String(loginError.data.message), { duration: 3000 });
+      if ('message' in loginError) {
+        toast.error(String(loginError.message), { duration: 3000 });
       } else {
         toast.error('Ocurrió un error inesperado.', { duration: 3000 });
       }

@@ -19,6 +19,7 @@ export default defineConfig({
       '@store': path.resolve(__dirname, './src/store'),
       '@utils': path.resolve(__dirname, './src/shared/utils'),
       '@assets': path.resolve(__dirname, './src/assets'),
+      '@srtTypes': path.resolve(__dirname, './src/shared/types'),
     },
   },
   plugins: [react(), tailwindcss()],

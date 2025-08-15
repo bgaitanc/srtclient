@@ -1,5 +1,5 @@
+import type { RouteCardProps } from '@srtTypes/route.types';
 import React from 'react';
-import type { RouteCardProps } from './route.types';
 
 const RouteCard: React.FC<RouteCardProps> = ({ route, onReserve }) => {
   return (

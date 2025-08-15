@@ -10,7 +10,6 @@ export const useRegisterUser = () => {
   const [
     registerAction,
     {
-      data: registerData,
       isSuccess: isRegisterSuccess,
       isError: isRegisterError,
       error: registerError,

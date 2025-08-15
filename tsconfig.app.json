@@ -33,7 +33,8 @@
       "@services/*": ["shared/services/*"],
       "@store/*": ["store/*"],
       "@utils/*": ["shared/utils/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@srtTypes/*": ["shared/types/*"]
     }
   },
   "include": ["src"]

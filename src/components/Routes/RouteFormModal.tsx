@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import type { RouteFormModalProps } from './route.types';
+import type { RouteFormModalProps } from '@srtTypes/route.types';
 
 const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData = {}, onSubmit, onClose, loading, isEdit }) => {
   const [form, setForm] = useState({

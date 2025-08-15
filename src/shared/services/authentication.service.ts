@@ -26,6 +26,7 @@ export const authenticationApi = createApi({
         method: 'POST',
         body,
       }),
+      transformErrorResponse: error => error.data,
     }),
     register: builder.mutation<SrtResponse<UserRegisterRes>, UserRegisterReq>({
       query: (body) => ({

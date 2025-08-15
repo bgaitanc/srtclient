@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { RouteDetailModalProps } from './route.types';
+import type { RouteDetailModalProps } from '@srtTypes/route.types';
 
 const RouteDetailModal: React.FC<RouteDetailModalProps> = ({ route, onClose }) => {
 
