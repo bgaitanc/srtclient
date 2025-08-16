@@ -7,6 +7,12 @@ export const STORAGE_KEYS = {
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 
 export const SrtFormats = {
-  DATE_SHORT: "DD/MM/YYYY",
-  DATE_TIME_SHORT: "DD/MM/YYYY hh:mm a",
-}
+  DATE_SHORT: 'DD/MM/YYYY',
+  DATE_TIME_SHORT: 'DD/MM/YYYY hh:mm a',
+};
+
+export const SrtRoles = {
+  Admin: 'Admin',
+  Customer: 'Cliente',
+  Driver: 'Conductor',
+};

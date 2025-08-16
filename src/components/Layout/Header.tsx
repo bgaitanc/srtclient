@@ -2,6 +2,8 @@ import React from 'react';
 import srtLogo from '@assets/images/srt_logo_transparent.png';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@hooks/useAuth.ts';
+import { SrtRoles } from '@config/constants.ts';
+import RolesGuard from '@components/Permission/RolesGuard.tsx';
 
 const Header: React.FC = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -30,6 +32,13 @@ const Header: React.FC = () => {
                 Viajes
               </Link>
             </li>
+            <RolesGuard roles={[SrtRoles.Admin]}>
+              <li>
+                <Link to="/routes" className="hover:text-blue-200">
+                  Rutas
+                </Link>
+              </li>
+            </RolesGuard>
             {!isAuthenticated ? (
               <li>
                 <Link to="/login" className="hover:text-blue-200">

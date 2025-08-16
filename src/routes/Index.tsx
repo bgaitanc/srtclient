@@ -8,6 +8,7 @@ import NotFoundPage from '../pages/NotFound/NotFoundPage';
 import ProtectedRoute from './ProtectedRoute';
 import MainLayout from '../components/Layout/MainLayout';
 import TravelsPage from '../pages/Travels/TravelsPage.tsx';
+import RoutesPage from '../pages/Routes/RoutesPage.tsx';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes: React.FC = () => {
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="travels" element={<ProtectedRoute><TravelsPage /></ProtectedRoute>} />
+          <Route path="routes" element={<RoutesPage />} />
         </Route>
 
         <Route path="/dashboard" element={<ProtectedRoute />}>

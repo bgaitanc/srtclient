@@ -4,6 +4,7 @@ import {
   setAuth,
   logout as logoutAction,
   setUser,
+  setRoles,
 } from '@store/slices/authSlice';
 import { getToken, removeToken, setToken } from '@utils/token.ts';
 import { jwtDecode } from 'jwt-decode';
@@ -22,10 +23,14 @@ export const useAuth = () => {
       if (token) {
         // Validar token con backend
         const decodedToken = jwtDecode<CustomJwtPayload>(token);
+        const roles = JSON.parse(decodedToken.roles) as string[];
         dispatch(setAuth(true));
         dispatch(setUser(decodedToken.nameid));
+        dispatch(setRoles(roles));
       } else {
         dispatch(setAuth(false));
+        dispatch(setUser(null));
+        dispatch(setRoles([]));
       }
       setIsLoading(false);
     };

@@ -26,4 +26,5 @@ export type UserRegisterRes = {
 export type CustomJwtPayload = JwtPayload & {
   unique_name: string;
   nameid: number;
+  roles: string;
 };
