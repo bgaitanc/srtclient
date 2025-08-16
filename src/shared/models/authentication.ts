@@ -1,3 +1,5 @@
+import type { JwtPayload } from 'jwt-decode';
+
 export type UserLoginReq = {
   User: string;
   Password: string;
@@ -19,4 +21,9 @@ export type UserRegisterReq = {
 export type UserRegisterRes = {
   userId: string;
   username: string;
+};
+
+export type CustomJwtPayload = JwtPayload & {
+  unique_name: string;
+  nameid: number;
 };

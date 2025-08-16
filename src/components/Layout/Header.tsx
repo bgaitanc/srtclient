@@ -26,8 +26,8 @@ const Header: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link to="/routes" className="hover:text-blue-200">
-                Rutas
+              <Link to="/travels" className="hover:text-blue-200">
+                Viajes
               </Link>
             </li>
             {!isAuthenticated ? (

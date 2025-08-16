@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks.ts';
-import { setAuth, logout as logoutAction } from '@store/slices/authSlice';
+import {
+  setAuth,
+  logout as logoutAction,
+  setUser,
+} from '@store/slices/authSlice';
 import { getToken, removeToken, setToken } from '@utils/token.ts';
+import { jwtDecode } from 'jwt-decode';
+import type { CustomJwtPayload } from '@models/authentication.ts';
 
 export const useAuth = () => {
   const dispatch = useAppDispatch();
@@ -12,9 +18,12 @@ export const useAuth = () => {
   useEffect(() => {
     const checkAuth = () => {
       const token = getToken();
+
       if (token) {
         // Validar token con backend
+        const decodedToken = jwtDecode<CustomJwtPayload>(token);
         dispatch(setAuth(true));
+        dispatch(setUser(decodedToken.nameid));
       } else {
         dispatch(setAuth(false));
       }
