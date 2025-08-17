@@ -1,6 +1,10 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from '../pages/Home/HomePage';
+import PaisesAdminPage from '../pages/Paises/PaisesAdminPage';
+import DepartamentosAdminPage from '../pages/Departamentos/DepartamentosAdminPage';
+import RoutesAdminPage from '../pages/Routes/RoutesAdminPage';
+import LocacionesAdminPage from '../pages/Locaciones/LocacionesAdminPage';
 import LoginPage from '../pages/Auth/LoginPage';
 import RegisterPage from '../pages/Auth/RegisterPage';
 import DashboardPage from '../pages/Dashboard/DashboardPage';
@@ -32,6 +36,11 @@ const AppRoutes: React.FC = () => {
             }
           />
         </Route>
+
+        <Route path="/routes-admin" element={<MainLayout><RoutesAdminPage /></MainLayout>} />
+        <Route path="/paises-admin" element={<MainLayout><PaisesAdminPage /></MainLayout>} />
+        <Route path="/departamentos-admin" element={<MainLayout><DepartamentosAdminPage /></MainLayout>} />
+        <Route path="/locaciones-admin" element={<MainLayout><LocacionesAdminPage /></MainLayout>} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

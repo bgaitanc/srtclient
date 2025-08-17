@@ -1,3 +1,9 @@
+export type RouteFormValues = {
+  locacionOrigenId: number;
+  locacionDestinoId: number;
+  distanciaKm: number;
+  tiempoEstimado: string;
+};
 export interface RouteCardData {
   id: number;
   origen: string;
@@ -18,7 +24,7 @@ export interface RouteDetailModalProps {
 
 export interface RouteFormModalProps {
   initialData?: Route;
-  onSubmit: (data: any) => void;
+  onSubmit: (data: RouteFormValues) => void;
   onClose: () => void;
   loading?: boolean;
   isEdit?: boolean;

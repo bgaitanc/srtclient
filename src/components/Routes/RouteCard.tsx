@@ -33,7 +33,7 @@ const RouteCard: React.FC<RouteCardProps> = ({ route, onReserve }) => {
           className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 text-lg tracking-wide"
           onClick={() => onReserve(route)}
         >
-          Reservar
+          Editar
         </button>
       </div>
     </div>
