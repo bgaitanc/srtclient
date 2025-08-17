@@ -37,7 +37,7 @@ const TravelsPage: React.FC = () => {
       <TravelsHeader />
       {isLoading && (
         <div className="text-center text-blue-600 text-xl font-semibold">
-          Cargando rutas...
+          Cargando viajes disponibles...
         </div>
       )}
       {error && (
