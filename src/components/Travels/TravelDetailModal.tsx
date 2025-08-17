@@ -43,13 +43,6 @@ const TravelDetailModal: React.FC<TravelDetailModalProps> = ({
           <span className="font-bold text-blue-700">Fecha de llegada estimada:</span>{' '}
           {dayjs(travel.fechaHoraLlegada).format(SrtFormats.DATE_TIME_SHORT)}
         </div>
-        <div>
-          <span className="font-bold text-blue-700">Tiempo estimado:</span>{' '}
-          {travel.ruta.tiempoEstimado.replace(
-            /^(d{2}):(d{2}):(d{2})$/,
-            '$1h $2m'
-          )}
-        </div>
       </div>
       <div className="flex flex-col gap-2 mb-6 text-base text-gray-600">
         <div>

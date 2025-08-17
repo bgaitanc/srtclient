@@ -6,6 +6,7 @@ import TravelsHeader from '@components/Travels/TravelsHeader.tsx';
 import TravelCard from '@components/Travels/TravelCard.tsx';
 import TravelDetailModal from '@components/Travels/TravelDetailModal.tsx';
 import TravelReservationForm from '@components/Travels/TravelReservationForm.tsx';
+import ReservationTicket from '@components/Reservations/ReservationTicket.tsx';
 
 const TravelsPage: React.FC = () => {
   const { data: travels, isLoading, error } = useTravels();
@@ -16,7 +17,11 @@ const TravelsPage: React.FC = () => {
     handleReserve,
     handleCloseDetailModal,
     goToTravelReservation,
-    cancelTravelReservation
+    cancelTravelReservation,
+    showReservationTicket,
+    setShowReservationTicket,
+    createdReservation,
+    setCreatedReservation,
   } = useTravelReservation();
 
   return (
@@ -59,7 +64,16 @@ const TravelsPage: React.FC = () => {
         />
       )}
       {showTravelReservation && selectedTravel && (
-        <TravelReservationForm viajeId={selectedTravel.viajeId} onCancel={cancelTravelReservation}/>
+        <TravelReservationForm
+          viajeId={selectedTravel.viajeId}
+          onCancel={cancelTravelReservation}
+          setShowReservationTicket={setShowReservationTicket}
+          setCreatedReservation={setCreatedReservation}
+        />
+      )}
+
+      {showReservationTicket && (
+        <ReservationTicket data={createdReservation!}/>
       )}
     </div>
   );

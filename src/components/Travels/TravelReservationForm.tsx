@@ -4,14 +4,16 @@ import type { TravelReservationFormProps } from '@srtTypes/reservationDetails.ty
 import { useReservations } from '@hooks/useReservations.ts';
 import CircularLoading from '@components/Loading/CircularLoading.tsx';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const TravelReservationForm: React.FC<TravelReservationFormProps> = ({
   viajeId,
   onCancel,
+  setShowReservationTicket,
+  setCreatedReservation,
 }) => {
   const { userId } = useAppSelector((state) => state.auth);
-  const navigate = useNavigate();
+
   const {
     reservationDetailsQuery: {
       data: reservationDetails,
@@ -20,6 +22,7 @@ const TravelReservationForm: React.FC<TravelReservationFormProps> = ({
     },
     createReservation,
     createReservationMeta: {
+      data: reservationInfo,
       isLoading: isCreatingReservation,
       isSuccess: isSuccessCreatingReservation,
       isError: isErrorCreatingReservation,
@@ -28,8 +31,6 @@ const TravelReservationForm: React.FC<TravelReservationFormProps> = ({
   } = useReservations({
     viajeId,
   });
-
-  console.log(userId);
 
   const reservedSeats = reservationDetails?.data.asientosReservados ?? [];
 
@@ -72,15 +73,16 @@ const TravelReservationForm: React.FC<TravelReservationFormProps> = ({
   };
 
   useEffect(() => {
-    if (isSuccessCreatingReservation) {
-      navigate('/');
+    if (isSuccessCreatingReservation && reservationInfo?.data) {
+      setCreatedReservation(reservationInfo.data);
+      setShowReservationTicket(true);
+      toast.success('Reserva creada exitosamente', { duration: 3000 });
     }
-  }, [isSuccessCreatingReservation]);
+  }, [isSuccessCreatingReservation, reservationInfo]);
 
   useEffect(() => {
     if (isErrorCreatingReservation) {
-      //TODO eliminar
-      console.log('Error al crear la reserva');
+      toast.error('Error al crear la reserva', { duration: 3000 });
       console.log(errorCreatingReservation);
     }
   }, [isErrorCreatingReservation, errorCreatingReservation]);

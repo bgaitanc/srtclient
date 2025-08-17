@@ -1,7 +1,10 @@
 import { srtApi } from '@services/base/srtApi.service.ts';
 import type { SrtResponse } from '@srtTypes/srtApi.types.ts';
 import type { ReservationDetails } from '@srtTypes/reservationDetails.types.ts';
-import type { ReservationReq } from '@srtTypes/reservation.types.ts';
+import type {
+  GetReservationInfoResponse,
+  ReservationReq,
+} from '@srtTypes/reservation.types.ts';
 
 const reservationsApi = srtApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,7 +21,7 @@ const reservationsApi = srtApi.injectEndpoints({
       }),
     }),
     postReservation: builder.mutation<
-      SrtResponse<{ reservaId: number }>,
+      SrtResponse<GetReservationInfoResponse>,
       ReservationReq
     >({
       query: (body) => ({
