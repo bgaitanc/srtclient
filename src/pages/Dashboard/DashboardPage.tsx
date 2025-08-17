@@ -1,52 +1,53 @@
-import React from 'react';
-import { useAuth } from '@hooks/useAuth.ts';
-import { useNavigate } from 'react-router-dom';
-import Button from '@components/Button/Button';
+import React, { useMemo } from 'react';
+import UserInfoCard from '@components/Dashboard/UserInfoCard.tsx';
+import UserReservationsCard from '@components/Dashboard/UserReservationsCard.tsx';
+import { useAppSelector } from '@store/hooks.ts';
+import CircularLoading from '@components/Loading/CircularLoading.tsx';
+import { useGetUserInfoQuery } from '@services/users.service.ts';
+import { useGetUserReservationsQuery } from '@services/reservations.service.ts';
 
 const DashboardPage: React.FC = () => {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
+  const { userId } = useAppSelector((state) => state.auth);
+  const {
+    data: userData,
+    isLoading: isLoadingUserData,
+    isFetching: isFetchingUserData,
+  } = useGetUserInfoQuery(undefined, {
+    skip: !userId,
+    refetchOnMountOrArgChange: true,
+  });
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const {
+    data: reservations,
+    isLoading: isLoadingReservations,
+    isFetching: isFetchingReservations,
+  } = useGetUserReservationsQuery(userId ?? 0, {
+    skip: !userId,
+    refetchOnMountOrArgChange: true,
+  });
+
+  const isLoading = useMemo(
+    () =>
+      isLoadingUserData ||
+      isFetchingUserData ||
+      isLoadingReservations ||
+      isFetchingReservations,
+    [
+      isLoadingUserData,
+      isFetchingUserData,
+      isLoadingReservations,
+      isFetchingReservations,
+    ]
+  );
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center gap-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
-          Bienvenido al Dashboard
-        </h1>
-        <p className="text-lg text-gray-600 mb-8">
-          Esta es una página protegida a la que solo los usuarios autenticados
-          pueden acceder. Aquí podrás gestionar tus reservas, ver tu perfil,
-          etc.
-        </p>
-        <Button
-          onClick={handleLogout}
-          className="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-lg shadow-md transition duration-300"
-        >
-          Cerrar Sesión
-        </Button>
+    <>
+      <CircularLoading show={isLoading} />
+      <div className="flex flex-col items-center justify-center min-h-screen text-center gap-8">
+        <UserInfoCard userData={userData?.data} />
+        <UserReservationsCard reservationsData={reservations?.data} />
       </div>
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
-          Bienvenido al Dashboard
-        </h1>
-        <p className="text-lg text-gray-600 mb-8">
-          Esta es una página protegida a la que solo los usuarios autenticados
-          pueden acceder. Aquí podrás gestionar tus reservas, ver tu perfil,
-          etc.
-        </p>
-        <Button
-          onClick={handleLogout}
-          className="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded-lg shadow-md transition duration-300"
-        >
-          Cerrar Sesión
-        </Button>
-      </div>
-    </div>
+    </>
   );
 };
 

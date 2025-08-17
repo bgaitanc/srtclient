@@ -20,6 +20,18 @@ const reservationsApi = srtApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getUserReservations: builder.query<
+      SrtResponse<GetReservationInfoResponse[]>,
+      number
+    >({
+      query: (param) => ({
+        url: '/reservas/user',
+        params: {
+          userId: param,
+        },
+        method: 'GET',
+      }),
+    }),
     postReservation: builder.mutation<
       SrtResponse<GetReservationInfoResponse>,
       ReservationReq
@@ -33,5 +45,8 @@ const reservationsApi = srtApi.injectEndpoints({
   }),
 });
 
-export const { useGetReservationDetailsQuery, usePostReservationMutation } =
-  reservationsApi;
+export const {
+  useGetReservationDetailsQuery,
+  usePostReservationMutation,
+  useGetUserReservationsQuery,
+} = reservationsApi;

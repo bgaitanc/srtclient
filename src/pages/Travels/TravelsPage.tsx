@@ -7,6 +7,7 @@ import TravelCard from '@components/Travels/TravelCard.tsx';
 import TravelDetailModal from '@components/Travels/TravelDetailModal.tsx';
 import TravelReservationForm from '@components/Travels/TravelReservationForm.tsx';
 import ReservationTicket from '@components/Reservations/ReservationTicket.tsx';
+import { useNavigate } from 'react-router-dom';
 
 const TravelsPage: React.FC = () => {
   const { data: travels, isLoading, error } = useTravels();
@@ -23,6 +24,12 @@ const TravelsPage: React.FC = () => {
     createdReservation,
     setCreatedReservation,
   } = useTravelReservation();
+
+  const navigation = useNavigate();
+
+  const onClose = () => {
+    navigation('/dashboard', { viewTransition: true });
+  };
 
   return (
     <div className="min-h-screen py-10">
@@ -73,7 +80,11 @@ const TravelsPage: React.FC = () => {
       )}
 
       {showReservationTicket && (
-        <ReservationTicket data={createdReservation!}/>
+        <ReservationTicket
+          data={createdReservation!}
+          onClose={onClose}
+          onSubmit={onClose}
+        />
       )}
     </div>
   );
