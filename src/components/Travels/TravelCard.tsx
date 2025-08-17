@@ -14,6 +14,11 @@ const TravelCard: React.FC<TravelCardProps> = ({ travel, onReserve }) => {
           </span>
         </div>
         <div className="flex items-center justify-center gap-4 mb-6 mt-2">
+          <span className="text-md font-extrabold text-blue-700 drop-shadow">
+            Precio: {`C$ ${travel.costo}`}
+          </span>
+        </div>
+        <div className="flex items-center justify-center gap-4 mb-6 mt-2">
           <span className="text-xl font-extrabold text-blue-700 drop-shadow">
             {travel.ruta.locacionOrigen}
           </span>
