@@ -62,7 +62,7 @@ const TravelDetailModal: React.FC<TravelDetailModalProps> = ({
         className="mt-8 w-full bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-bold py-3 rounded-xl shadow-lg transition duration-300 text-lg"
         onClick={onSubmit}
       >
-        Confirmar reserva
+        Seleccionar asientos
       </button>
     </BaseModal>
   );
