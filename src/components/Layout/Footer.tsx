@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
           &copy; {new Date().getFullYear()} Sistema de Reserva de Transporte.
           Todos los derechos reservados.
         </p>
-        <p>Desarrollado por DevTeam</p>
+        <p>Desarrollado por DarkCore</p>
       </div>
     </footer>
   );
