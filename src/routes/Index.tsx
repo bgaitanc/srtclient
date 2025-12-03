@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import PaisesAdminPage from '../pages/Paises/PaisesAdminPage';
-import DepartamentosAdminPage from '../pages/Departamentos/DepartamentosAdminPage';
 import RoutesAdminPage from '../pages/Routes/RoutesAdminPage';
-import LocacionesAdminPage from '../pages/Locaciones/LocacionesAdminPage';
 import LoginPage from '../pages/Auth/LoginPage';
+import StatesAdminPage from '../pages/States/StatesAdminPage';
+import CountriesAdminPage from '../pages/Countries/CountriesAdminPage';
+import DestinationsAdminPage from '../pages/Destinations/DestinationAdminPage';
 import DashboardPage from '../pages/Dashboard/DashboardPage';
 import NotFoundPage from '../pages/NotFound/NotFoundPage';
 import RouteGuard from './RouteGuard';
@@ -26,17 +26,17 @@ const AppRoutes: React.FC = () => {
           <Route index element={<DashboardPage />} />
         </Route>
 
-        <Route path="/routes-admin" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
+        <Route path="/routes" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
           <Route index element={<RoutesAdminPage />} />
         </Route>
-        <Route path="/paises-admin" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
-          <Route index element={<PaisesAdminPage />} />
+        <Route path="/countries" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
+          <Route index element={<CountriesAdminPage />} />
         </Route>
-        <Route path="/departamentos-admin" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
-          <Route index element={<DepartamentosAdminPage />} />
+        <Route path="/states" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
+          <Route index element={<StatesAdminPage />} />
         </Route>
-        <Route path="/locaciones-admin" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
-          <Route index element={<LocacionesAdminPage />} />
+        <Route path="/destinations" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
+          <Route index element={<DestinationsAdminPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

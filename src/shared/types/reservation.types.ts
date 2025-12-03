@@ -1,35 +1,35 @@
 export interface ReservationReq {
-  viajeId: number;
-  clienteId: number;
-  fechaReserva: Date | string;
-  detalle: number[];
+  travelId: number;
+  clientId: number;
+  reservationDate: Date | string;
+  detail: number[];
 }
 
 export interface GetReservationInfoResponse {
-  reservaId: number
-  viajeId: number
-  fechaReserva: string
-  detalle: DetalleInfo[]
-  viaje: ViajeInfo
-  ruta: RutaInfo
+  reservationId: number
+  travelId: number
+  reservationDate: string
+  detail: DetailInfo[]
+  travel: TravelInfo
+  route: RouteInfo
   total: number
 }
 
-export interface DetalleInfo {
-  detalleReservaId: number
-  reservaId: number
-  numeroAsiento: number
+export interface DetailInfo {
+  detailReservationId: number
+  reservationId: number
+  seatNumber: number
 }
 
-export interface ViajeInfo {
-  costo: number
-  fechaHoraSalida: string
-  fechaHoraLlegada: string
+export interface TravelInfo {
+  price: number
+  departureDate: string
+  arrivalDate: string
 }
 
-export interface RutaInfo {
-  locacionOrigen: string
-  locacionDestino: string
-  distanciaKM: number
-  tiempoEstimado: string
+export interface RouteInfo {
+  originLocation: string
+  destinationLocation: string
+  distanceKM: number
+  estimatedTime: string
 }

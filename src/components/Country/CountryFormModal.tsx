@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import BaseModal from '../shared/BaseModal';
-import type { Pais } from '../../shared/types/pais.types';
+import type { Country } from '../../shared/types/countries.types';
 
-interface PaisFormModalProps {
-  initialData?: Pais;
-  onSubmit: (data: { paisName: string; paisId?: number }) => void;
+interface CountryFormModalProps {
+  initialData?: Country;
+  onSubmit: (data: { countryName: string; countryId?: number }) => void;
   onClose: () => void;
   loading?: boolean;
   isEdit?: boolean;
 }
 
-const PaisFormModal: React.FC<PaisFormModalProps> = ({ initialData, onSubmit, onClose, loading, isEdit }) => {
-  const [paisName, setPaisName] = useState(initialData?.paisName ?? '');
+const CountryFormModal: React.FC<CountryFormModalProps> = ({ initialData, onSubmit, onClose, loading, isEdit }) => {
+  const [countryName, setCountryName] = useState(initialData?.countryName ?? '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEdit && initialData) {
-      onSubmit({ paisName, paisId: initialData.paisId });
+      onSubmit({ countryName, countryId: initialData.countryId });
     } else {
-      onSubmit({ paisName });
+      onSubmit({ countryName });
     }
   };
 
@@ -30,8 +30,8 @@ const PaisFormModal: React.FC<PaisFormModalProps> = ({ initialData, onSubmit, on
           <label className="block text-sm font-semibold mb-1">Nombre del país</label>
           <input
             type="text"
-            value={paisName}
-            onChange={e => setPaisName(e.target.value)}
+            value={countryName}
+            onChange={e => setCountryName(e.target.value)}
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
             required
           />
@@ -48,4 +48,4 @@ const PaisFormModal: React.FC<PaisFormModalProps> = ({ initialData, onSubmit, on
   );
 };
 
-export default PaisFormModal;
+export default CountryFormModal;

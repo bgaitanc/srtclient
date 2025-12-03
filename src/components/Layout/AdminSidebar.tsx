@@ -14,21 +14,21 @@ const AdminSidebar: React.FC = () => {
           <LayoutDashboard size={18} />
           <span>Dashboard</span>
         </NavLink>
-        <NavLink to="/routes-admin" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
+        <NavLink to="/routes" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
           <RouteIcon size={18} />
           <span>Rutas</span>
         </NavLink>
-        <NavLink to="/paises-admin" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
+        <NavLink to="/countries" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
           <Flag size={18} />
           <span>Países</span>
         </NavLink>
-        <NavLink to="/departamentos-admin" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
+        <NavLink to="/states" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
           <Map size={18} />
           <span>Departamentos</span>
         </NavLink>
-        <NavLink to="/locaciones-admin" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
+        <NavLink to="/destinations" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
           <MapPinned size={18} />
-          <span>Locaciones</span>
+          <span>Destinos</span>
         </NavLink>
       </nav>
     </aside>

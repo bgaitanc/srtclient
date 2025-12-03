@@ -1,56 +1,56 @@
 import { useState } from 'react';
-import { useActivePaises, usePaisMutations } from './paises.hooks';
+import { useActiveCountries, useCountryMutations } from './useActiveCountries';
 import { showSuccess, showError } from '../shared/utils/toast.utils';
-import type { Pais } from '../shared/types/pais.types';
+import type { Country } from '../shared/types/countries.types';
 
-export function usePaisesAdmin() {
-  const { paises, isLoading, error, refetch } = useActivePaises();
-  const { createPais, updatePais, deletePais } = usePaisMutations();
+export function useCountriesAdmin() {
+  const { countries, isLoading, error, refetch } = useActiveCountries();
+  const { createCountry, updateCountry, deleteCountry } = useCountryMutations();
   const [showModal, setShowModal] = useState(false);
-  const [editPais, setEditPais] = useState<Pais | undefined>(undefined);
+  const [editCountry, setEditCountry] = useState<Country | undefined>(undefined);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const [paisToDelete, setPaisToDelete] = useState<number | null>(null);
+  const [countryToDelete, setCountryToDelete] = useState<number | null>(null);
   const [modalLoading, setModalLoading] = useState(false);
 
   const handleCreate = () => {
-    setEditPais(undefined);
+    setEditCountry(undefined);
     setShowModal(true);
   };
 
-  const handleEdit = (pais: Pais) => {
-    setEditPais(pais);
+  const handleEdit = (country: Country) => {
+    setEditCountry(country);
     setShowModal(true);
   };
 
-  const handleDelete = (paisId: number) => {
-    setPaisToDelete(paisId);
+  const handleDelete = (countryId: number) => {
+    setCountryToDelete(countryId);
     setConfirmOpen(true);
   };
 
   const confirmDelete = async () => {
-    if (paisToDelete == null) return;
+    if (countryToDelete == null) return;
     setConfirmOpen(false);
     setModalLoading(true);
     try {
-      await deletePais(paisToDelete).unwrap();
+      await deleteCountry(countryToDelete).unwrap();
       showSuccess('País eliminado correctamente');
       refetch();
     } catch (error: any) {
       showError(error?.data?.message || 'Error al eliminar el país');
     } finally {
-      setPaisToDelete(null);
+      setCountryToDelete(null);
       setModalLoading(false);
     }
   };
 
-  const handleSubmit = async (data: { paisName: string; paisId?: number }) => {
+  const handleSubmit = async (data: { countryName: string; countryId?: number }) => {
     setModalLoading(true);
     try {
-      if (editPais && data.paisId) {
-        await updatePais({ paisId: data.paisId, paisName: data.paisName }).unwrap();
+      if (editCountry && data.countryId) {
+        await updateCountry({ countryId: data.countryId, countryName: data.countryName }).unwrap();
         showSuccess('País actualizado');
       } else {
-        await createPais({ paisName: data.paisName }).unwrap();
+        await createCountry({ countryName: data.countryName }).unwrap();
         showSuccess('País creado');
       }
       setShowModal(false);
@@ -63,11 +63,11 @@ export function usePaisesAdmin() {
   };
 
   return {
-    paises, isLoading, error, refetch,
+    countries, isLoading, error, refetch,
     showModal, setShowModal,
-    editPais, setEditPais,
+    editCountry, setEditCountry,
     confirmOpen, setConfirmOpen,
-    paisToDelete, setPaisToDelete,
+    countryToDelete, setCountryToDelete,
     modalLoading, setModalLoading,
     handleCreate, handleEdit, handleDelete,
     confirmDelete, handleSubmit

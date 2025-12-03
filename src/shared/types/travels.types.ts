@@ -1,34 +1,34 @@
 export interface Travel {
-  viajeId: number;
-  rutaId: number;
-  vehiculoId: number;
-  conductorId: number;
-  costo: number;
-  fechaHoraSalida: Date;
-  fechaHoraLlegada: Date;
-  estadoId: number;
-  ruta: RouteInfo;
-  vehiculo: VehicleInfo;
-  conductor: DriverInfo;
-  estado: string;
+  travelId: number;
+  routeId: number;
+  vehicleId: number;
+  driverId: number;
+  price: number;
+  departureDate: Date;
+  arrivalDate: Date;
+  statusId: number;
+  route: RouteInfo;
+  vehicle: VehicleInfo;
+  driver: DriverInfo;
+  status: string;
 }
 
 export interface RouteInfo {
-  locacionOrigen: string;
-  locacionDestino: string;
-  distanciaKM: number;
-  tiempoEstimado: string;
+  originDestination: string;
+  finalDestination: string;
+  distanceKm: number;
+  estimatedTime: string;
 }
 
 export interface VehicleInfo {
-  placa: string;
-  modelo: string;
-  capacidad: number;
+  licensePlate: string;
+  model: string;
+  capacity: number;
 }
 
 export interface DriverInfo {
-  nombres: string;
-  apellidos: string;
+  name: string;
+  surname: string;
 }
 
 export interface TravelCardProps {

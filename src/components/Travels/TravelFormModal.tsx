@@ -5,10 +5,10 @@ import type { Travel, TravelFormModalProps } from '@srtTypes/travels.types.ts';
 const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit, onClose, loading, isEdit }) => {
   //TODO esto debería ser viaje
   const [form, setForm] = useState({
-    locacionOrigenNombre: initialData.ruta.locacionOrigen,
-    locacionDestinoNombre: initialData.ruta.locacionDestino,
-    distanciaKm: initialData.ruta.distanciaKM,
-    tiempoEstimado: initialData.ruta.tiempoEstimado ,
+    originDestination: initialData.route.originDestination,
+    finalDestination: initialData.route.finalDestination,
+    distanceKm: initialData.route.distanceKm,
+    estimatedTime: initialData.route.estimatedTime,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,8 +35,8 @@ const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit
             <label className="block text-sm font-semibold mb-1">Origen (ID)</label>
             <input
               type="number"
-              name="locacionOrigenId"
-              value={form.locacionOrigenNombre}
+              name="originDestinationId"
+              value={form.originDestination}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
               required
@@ -46,8 +46,8 @@ const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit
             <label className="block text-sm font-semibold mb-1">Destino (ID)</label>
             <input
               type="number"
-              name="locacionDestinoId"
-              value={form.locacionDestinoNombre}
+              name="finalDestinationId"
+              value={form.finalDestination}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
               required
@@ -57,8 +57,8 @@ const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit
             <label className="block text-sm font-semibold mb-1">Distancia (km)</label>
             <input
               type="number"
-              name="distanciaKm"
-              value={form.distanciaKm}
+              name="distanceKm"
+              value={form.distanceKm}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
               required
@@ -68,8 +68,8 @@ const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit
             <label className="block text-sm font-semibold mb-1">Tiempo estimado (hh:mm:ss)</label>
             <input
               type="text"
-              name="tiempoEstimado"
-              value={form.tiempoEstimado}
+              name="estimatedTime"
+              value={form.estimatedTime}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
               required

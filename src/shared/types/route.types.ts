@@ -1,15 +1,15 @@
 export type RouteFormValues = {
-  locacionOrigenId: number;
-  locacionDestinoId: number;
-  distanciaKm: number;
-  tiempoEstimado: string;
+  originDestinationId: number;
+  finalDestinationId: number;
+  distanceKm: number;
+  estimatedTime: string;
 };
 export interface RouteCardData {
   id: number;
-  origen: string;
-  destino: string;
-  distanciaKm: number;
-  tiempoEstimado: string;
+  origin: string;
+  destination: string;
+  distanceKm: number;
+  estimatedTime: string;
 }
 
 export interface RouteCardProps {
@@ -23,7 +23,7 @@ export interface RouteDetailModalProps {
 }
 
 export interface RouteFormModalProps {
-  initialData?: Route;
+  initialData?: Partial<RouteFormValues>;
   onSubmit: (data: RouteFormValues) => void;
   onClose: () => void;
   loading?: boolean;
@@ -31,14 +31,14 @@ export interface RouteFormModalProps {
 }
 
 export type Route = {
-  rutaId: number;
-  locacionOrigenId: number;
-  locacionOrigenNombre: string;
-  locacionDestinoId: number;
-  locacionDestinoNombre: string;
-  distanciaKm: number;
-  tiempoEstimado: string;
+  routeId: number;
+  originDestinationId: number;
+  originDestinationName: string;
+  finalDestinationId: number;
+  finalDestinationName: string;
+  distanceKm: number;
+  estimatedTime: string;
 }
 
-export type CreateRouteReq = Omit<Route, 'rutaId' | 'locacionDestinoNombre' | 'locacionOrigenNombre'>;
-export type UpdateRouteReq = CreateRouteReq & { rutaId: number };
+export type CreateRouteReq = Omit<Route, 'routeId' | 'finalDestinationName' | 'originDestinationName'>;
+export type UpdateRouteReq = CreateRouteReq & { routeId: number };

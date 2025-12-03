@@ -1,17 +1,17 @@
 import React from 'react';
-import { usePaisesAdmin } from '../../hooks/usePaisesAdmin';
+import { useCountriesAdmin } from '../../hooks/useCountriesAdmin';
 import { Toaster } from 'react-hot-toast';
 import ConfirmModal from '../../components/shared/ConfirmModal';
-import PaisesList from '../../components/Paises/PaisesList';
-import PaisFormModal from '../../components/Paises/PaisFormModal';
+import CountryFormModal from '../../components/Country/CountryFormModal';
+import CountriesList from '../../components/Country/CountriesList';
 
-const PaisesAdminPage: React.FC = () => {
+const CountriesAdminPage: React.FC = () => {
   const {
-    paises, isLoading, error,
+    countries, isLoading, error,
     showModal, handleCreate, handleEdit, handleDelete,
-    editPais, handleSubmit, modalLoading,
-    confirmOpen, confirmDelete, setConfirmOpen, setPaisToDelete
-  } = usePaisesAdmin();
+    editCountry, handleSubmit, modalLoading,
+    confirmOpen, confirmDelete, setConfirmOpen, setCountryToDelete
+  } = useCountriesAdmin();
 
   return (
     <div className="min-h-screen py-10">
@@ -30,14 +30,14 @@ const PaisesAdminPage: React.FC = () => {
       {error && (
         <div className="text-center text-red-600 text-lg font-semibold">Ocurrió un error al cargar los países.</div>
       )}
-      <PaisesList paises={paises} onEdit={handleEdit} onDelete={handleDelete} />
+      <CountriesList countries={countries} onEdit={handleEdit} onDelete={handleDelete} />
       {showModal && (
-        <PaisFormModal
-          initialData={editPais}
+        <CountryFormModal
+          initialData={editCountry}
           onSubmit={handleSubmit}
           onClose={handleCreate}
           loading={modalLoading}
-          isEdit={!!editPais}
+          isEdit={!!editCountry}
         />
       )}
       <ConfirmModal
@@ -45,7 +45,7 @@ const PaisesAdminPage: React.FC = () => {
         title="Eliminar país"
         message="¿Seguro que deseas eliminar este país?"
         onConfirm={confirmDelete}
-        onCancel={() => { setConfirmOpen(false); setPaisToDelete(null); }}
+        onCancel={() => { setConfirmOpen(false); setCountryToDelete(null); }}
         confirmText="Eliminar"
         cancelText="Cancelar"
       />
@@ -53,4 +53,4 @@ const PaisesAdminPage: React.FC = () => {
   );
 };
 
-export default PaisesAdminPage;
+export default CountriesAdminPage;

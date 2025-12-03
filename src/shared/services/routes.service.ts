@@ -10,27 +10,27 @@ export const routesApi = srtApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllRoutes: builder.query<SrtResponse<Route[]>, void>({
       query: () => ({
-        url: '/rutas/all',
+        url: '/routes/all',
         method: 'GET',
       }),
     }),
-    createRoute: builder.mutation<SrtResponse<{rutaId: number}>, CreateRouteReq>({
+    createRoute: builder.mutation<SrtResponse<{routeId: number}>, CreateRouteReq>({
       query: (body) => ({
-        url: '/rutas/create',
+        url: '/routes/create',
         method: 'POST',
         body,
       }),
     }),
-    updateRoute: builder.mutation<SrtResponse<{rutaId: number}>, UpdateRouteReq>({
+    updateRoute: builder.mutation<SrtResponse<{routeId: number}>, UpdateRouteReq>({
       query: req => ({
-        url: `/rutas/update`,
+        url: `/routes/update`,
         method: 'PUT',
         body: req,
       }),
     }),
     deleteRoute: builder.mutation<SrtResponse<any>, number>({
-      query: (rutaId) => ({
-        url: `/rutas/${rutaId}/delete`,
+      query: (routeId) => ({
+        url: `/routes/${routeId}/delete`,
         method: 'DELETE',
       }),
     }),

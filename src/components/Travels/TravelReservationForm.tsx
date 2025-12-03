@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { toast } from 'react-hot-toast';
 
 const TravelReservationForm: React.FC<TravelReservationFormProps> = ({
-  viajeId,
+  travelId,
   onCancel,
   setShowReservationTicket,
   setCreatedReservation,
@@ -29,16 +29,16 @@ const TravelReservationForm: React.FC<TravelReservationFormProps> = ({
       error: errorCreatingReservation,
     },
   } = useReservations({
-    viajeId,
+    travelId,
   });
-
-  const reservedSeats = reservationDetails?.data.asientosReservados ?? [];
+  
+  const reservedSeats = reservationDetails?.data.reservedSeats ?? [];
 
   const [selectedSeats, setSelectedSeats] = React.useState<number[]>([]);
 
   const seats = useMemo(() => {
     const s = Array.from(
-      { length: reservationDetails?.data.capacidad ?? 0 },
+      { length: reservationDetails?.data.capacity ?? 0 },
       (_, i) => i + 1
     );
 
@@ -62,11 +62,11 @@ const TravelReservationForm: React.FC<TravelReservationFormProps> = ({
   };
   const onConfirm = () => {
     const request = {
-      viajeId,
-      clienteId: userId!,
-      detalle: selectedSeats,
+      travelId,
+      clientId: userId!,
+      detail: selectedSeats,
       //TODO la fecha la esta registrando en UTC
-      fechaReserva: new Date().toISOString(),
+      reservationDate: new Date().toISOString(),
     };
 
     createReservation(request);

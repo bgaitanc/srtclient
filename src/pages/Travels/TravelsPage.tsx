@@ -57,7 +57,7 @@ const TravelsPage: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-4 max-w-7xl mx-auto">
         {travels?.data.map((travel) => (
           <TravelCard
-            key={travel.viajeId}
+            key={travel.travelId}
             travel={travel}
             onReserve={handleReserve}
           />
@@ -72,7 +72,7 @@ const TravelsPage: React.FC = () => {
       )}
       {showTravelReservation && selectedTravel && (
         <TravelReservationForm
-          viajeId={selectedTravel.viajeId}
+          travelId={selectedTravel.travelId}
           onCancel={cancelTravelReservation}
           setShowReservationTicket={setShowReservationTicket}
           setCreatedReservation={setCreatedReservation}

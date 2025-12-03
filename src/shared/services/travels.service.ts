@@ -6,7 +6,7 @@ const travelsApi = srtApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllTravels: builder.query<SrtResponse<Travel[]>, void>({
       query: () => ({
-        url: '/viajes/all',
+        url: '/travels/all',
         method: 'GET',
       }),
     }),

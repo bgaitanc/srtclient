@@ -35,20 +35,20 @@ const RoutesAdminPage: React.FC = () => {
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 px-4 max-w-7xl mx-auto">
   {routes.map((route) => (
-          <div key={route.rutaId} className="relative group">
+          <div key={route.routeId} className="relative group">
             <RouteCard
               route={{
-                id: route.rutaId,
-                origen: route.locacionOrigenNombre,
-                destino: route.locacionDestinoNombre,
-                distanciaKm: route.distanciaKm,
-                tiempoEstimado: route.tiempoEstimado,
+                id: route.routeId,
+                origin: route.originDestinationName,
+                destination: route.finalDestinationName,
+                distanceKm: route.distanceKm,
+                estimatedTime: route.estimatedTime,
               }}
               onReserve={() => handleEdit(route)}
             />
             <button
               className="absolute top-4 right-4 bg-red-500 hover:bg-red-700 text-white rounded-full p-2 shadow transition duration-200"
-              onClick={() => handleDelete(route.rutaId)}
+              onClick={() => handleDelete(route.routeId)}
               title="Eliminar ruta"
             >
               🗑️

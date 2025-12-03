@@ -13,9 +13,9 @@ const reservationsApi = srtApi.injectEndpoints({
       number
     >({
       query: (param) => ({
-        url: '/reservas/detalle',
+        url: '/reservations/details',
         params: {
-          viajeId: param,
+          travelId: param,
         },
         method: 'GET',
       }),
@@ -25,7 +25,7 @@ const reservationsApi = srtApi.injectEndpoints({
       number
     >({
       query: (param) => ({
-        url: '/reservas/user',
+        url: '/reservations/user',
         params: {
           userId: param,
         },
@@ -37,7 +37,7 @@ const reservationsApi = srtApi.injectEndpoints({
       ReservationReq
     >({
       query: (body) => ({
-        url: '/reservas/create',
+        url: '/reservations/create',
         body,
         method: 'POST',
       }),
