@@ -56,11 +56,12 @@ const LoginPage: React.FC = () => {
       }
       try {
         const request: UserLoginReq = {
-          User: values.username,
+          Username: values.username,
           Password: values.password,
         };
         await loginAction(request);
-      } catch {
+      } catch (error) {
+        console.error('Login error:', error);
         toast.error('Ocurrió un error inesperado.', { duration: 3000 });
       }
     },
@@ -68,13 +69,19 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (isLoginSuccess && loginData) {
-      login(loginData.data.token);
-      navigate('/dashboard');
+      if (loginData.data?.token && loginData.data?.refreshToken) {
+        login(loginData.data.token, loginData.data.refreshToken);
+        navigate('/dashboard');
+      } else {
+        console.error('Token or RefreshToken missing in response');
+        toast.error('Error: Tokens no recibidos del servidor', { duration: 3000 });
+      }
     }
-  }, [isLoginSuccess, loginData]);
+  }, [isLoginSuccess, loginData, login, navigate]);
 
   useEffect(() => {
     if (isLoginError && loginError) {
+      console.error('Login error:', loginError);
       if ('message' in loginError) {
         toast.error(String(loginError.message), { duration: 3000 });
       } else {

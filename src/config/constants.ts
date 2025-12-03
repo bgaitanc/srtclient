@@ -1,5 +1,6 @@
 export const STORAGE_KEYS = {
   AUTH_TOKEN: import.meta.env.VITE_AUTH_TOKEN_KEY ?? 'default_auth_token',
+  REFRESH_TOKEN: import.meta.env.VITE_REFRESH_TOKEN_KEY ?? 'default_refresh_token',
   USER_SETTINGS:
     import.meta.env.VITE_USER_SETTINGS_KEY ?? 'default_user_settings',
 };

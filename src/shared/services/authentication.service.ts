@@ -6,6 +6,7 @@ import type {
   UserLoginRes,
   UserRegisterReq,
   UserRegisterRes,
+  RefreshTokenReq,
 } from '@models/authentication.ts';
 import type { SrtResponse } from '../types/srtApi.types.ts';
 
@@ -22,7 +23,7 @@ export const authenticationApi = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<SrtResponse<UserLoginRes>, UserLoginReq>({
       query: (body) => ({
-        url: '/Authentication/login',
+        url: '/authentication/login',
         method: 'POST',
         body,
       }),
@@ -30,12 +31,20 @@ export const authenticationApi = createApi({
     }),
     register: builder.mutation<SrtResponse<UserRegisterRes>, UserRegisterReq>({
       query: (body) => ({
-        url: '/Users/register',
+        url: '/users/register',
         method: 'POST',
         body,
       }),
     }),
+    refreshToken: builder.mutation<SrtResponse<UserLoginRes>, RefreshTokenReq>({
+      query: (body) => ({
+        url: '/authentication/refresh-token',
+        method: 'POST',
+        body,
+      }),
+      transformErrorResponse: error => error.data,
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authenticationApi;
+export const { useLoginMutation, useRegisterMutation, useRefreshTokenMutation } = authenticationApi;
