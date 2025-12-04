@@ -15,20 +15,20 @@ export const routesApi = srtApi.injectEndpoints({
       }),
     }),
     createRoute: builder.mutation<SrtResponse<{routeId: number}>, CreateRouteReq>({
-      query: (body) => ({
+      query: (req) => ({
         url: '/routes/create',
         method: 'POST',
-        body,
+        body: req,
       }),
     }),
     updateRoute: builder.mutation<SrtResponse<{routeId: number}>, UpdateRouteReq>({
-      query: req => ({
+      query: (req) => ({
         url: `/routes/update`,
         method: 'PUT',
         body: req,
       }),
     }),
-    deleteRoute: builder.mutation<SrtResponse<any>, number>({
+    deleteRoute: builder.mutation<SrtResponse<any>, string>({
       query: (routeId) => ({
         url: `/routes/${routeId}/delete`,
         method: 'DELETE',

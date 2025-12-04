@@ -9,7 +9,7 @@ export function useRoutesAdmin() {
   const [showModal, setShowModal] = useState(false);
   const [editRoute, setEditRoute] = useState<Route | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const [routeToDelete, setRouteToDelete] = useState<number | null>(null);
+  const [routeToDelete, setRouteToDelete] = useState<string | null>(null);
   const [createRoute] = useCreateRouteMutation();
   const [updateRoute] = useUpdateRouteMutation();
   const [deleteRoute] = useDeleteRouteMutation();
@@ -25,8 +25,8 @@ export function useRoutesAdmin() {
     setShowModal(true);
   };
 
-  const handleDelete = (rutaId: number) => {
-    setRouteToDelete(rutaId);
+  const handleDelete = (routeId: string) => {
+    setRouteToDelete(routeId);
     setConfirmOpen(true);
   };
 
@@ -48,10 +48,21 @@ export function useRoutesAdmin() {
     setModalLoading(true);
     try {
       if (editRoute) {
-        await updateRoute({ ...data, rutaId: editRoute.rutaId }).unwrap();
+        await updateRoute({
+          routeId: editRoute.routeId,
+          originDestinationId: data.originDestinationId,
+          finalDestinationId: data.finalDestinationId,
+          distanceInKm: data.distanceKm,
+          estimatedTime: data.estimatedTime,
+        }).unwrap();
         toast.success('Ruta actualizada');
       } else {
-        await createRoute(data).unwrap();
+        await createRoute({
+          originDestinationId: data.originDestinationId,
+          finalDestinationId: data.finalDestinationId,
+          distanceInKm: data.distanceKm,
+          estimatedTime: data.estimatedTime,
+        }).unwrap();
         toast.success('Ruta creada');
       }
       setShowModal(false);

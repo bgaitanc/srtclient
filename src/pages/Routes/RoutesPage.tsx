@@ -35,10 +35,10 @@ const RoutesPage: React.FC = () => {
           <RouteCard
             key={route.routeId}
             route={{
-              id: route.routeId,
+              id: Number(route.routeId),
               origin: route.originDestinationName,
               destination: route.finalDestinationName,
-              distanceKm: route.distanceKm,
+              distanceKm: route.distanceInKm,
               estimatedTime: route.estimatedTime,
             }}
             onReserve={() => {}}

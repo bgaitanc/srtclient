@@ -31,14 +31,19 @@ export interface RouteFormModalProps {
 }
 
 export type Route = {
-  routeId: number;
+  routeId: string;
   originDestinationId: string;
   originDestinationName: string;
   finalDestinationId: string;
   finalDestinationName: string;
-  distanceKm: number;
+  distanceInKm: number;
   estimatedTime: string;
 }
 
-export type CreateRouteReq = Omit<Route, 'routeId' | 'finalDestinationName' | 'originDestinationName'>;
-export type UpdateRouteReq = CreateRouteReq & { routeId: number };
+export type CreateRouteReq = {
+  originDestinationId: string;
+  finalDestinationId: string;
+  distanceInKm: number;
+  estimatedTime: string;
+};
+export type UpdateRouteReq = CreateRouteReq & { routeId: string };
