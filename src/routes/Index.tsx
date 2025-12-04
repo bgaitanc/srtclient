@@ -5,6 +5,7 @@ import LoginPage from '../pages/Auth/LoginPage';
 import StatesAdminPage from '../pages/States/StatesAdminPage';
 import CountriesAdminPage from '../pages/Countries/CountriesAdminPage';
 import DestinationsAdminPage from '../pages/Destinations/DestinationAdminPage';
+import VehiclesAdminPage from '../pages/Vehicles/VehiclesAdminPage';
 import DashboardPage from '../pages/Dashboard/DashboardPage';
 import NotFoundPage from '../pages/NotFound/NotFoundPage';
 import RouteGuard from './RouteGuard';
@@ -37,6 +38,9 @@ const AppRoutes: React.FC = () => {
         </Route>
         <Route path="/destinations" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
           <Route index element={<DestinationsAdminPage />} />
+        </Route>
+        <Route path="/vehicles" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
+          <Route index element={<VehiclesAdminPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

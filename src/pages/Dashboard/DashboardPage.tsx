@@ -5,6 +5,7 @@ import { useGetAllStatesQuery } from '@services/state.service.ts';
 import { useGetAllDestinationsQuery } from '@services/destinations.service.ts';
 import { useGetAllRoutesQuery } from '@services/routes.service.ts';
 import { useGetAllTravelsQuery } from '@services/travels.service.ts';
+import { useGetAllVehiclesQuery } from '../../shared/services/vehicles.service';
 
 const DashboardPage: React.FC = () => {
   const { data: countriesData, isLoading: loadingCountries } = useGetAllCountriesQuery();
@@ -12,10 +13,11 @@ const DashboardPage: React.FC = () => {
   const { data: destinationsData, isLoading: loadingDestinations } = useGetAllDestinationsQuery({});
   const { data: routesData, isLoading: loadingRoutes } = useGetAllRoutesQuery();
   const { data: travelsData, isLoading: loadingTravels } = useGetAllTravelsQuery();
+  const { data: vehiclesData, isLoading: loadingVehicles } = useGetAllVehiclesQuery();
 
   const isLoading = useMemo(
-    () => loadingCountries || loadingStates || loadingDestinations || loadingRoutes || loadingTravels,
-    [loadingCountries, loadingStates, loadingDestinations, loadingRoutes, loadingTravels]
+    () => loadingCountries || loadingStates || loadingDestinations || loadingRoutes || loadingTravels || loadingVehicles,
+    [loadingCountries, loadingStates, loadingDestinations, loadingRoutes, loadingTravels, loadingVehicles]
   );
 
   const kpis = useMemo(() => {
@@ -24,8 +26,9 @@ const DashboardPage: React.FC = () => {
     const destinations = (destinationsData?.data ?? []).filter((d: any) => d.active !== false).length;
     const routes = (routesData?.data ?? []).length;
     const travels = (travelsData?.data ?? []).length;
-    return { countries, states, destinations, routes, travels };
-  }, [countriesData, statesData, destinationsData, routesData, travelsData]);
+    const vehicles = (vehiclesData?.data ?? []).length;
+    return { countries, states, destinations, routes, travels, vehicles };
+  }, [countriesData, statesData, destinationsData, routesData, travelsData, vehiclesData]);
 
   const recentRoutes = useMemo(() => {
     const list = (routesData?.data ?? []);
@@ -42,12 +45,13 @@ const DashboardPage: React.FC = () => {
             {isLoading && <span className="text-sm text-gray-500">Cargando estadísticas...</span>}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
             <KpiCard title="Países" value={kpis.countries} color="bg-blue-600" />
             <KpiCard title="Departamentos" value={kpis.states} color="bg-indigo-600" />
             <KpiCard title="Destinos" value={kpis.destinations} color="bg-cyan-600" />
             <KpiCard title="Rutas" value={kpis.routes} color="bg-teal-600" />
             <KpiCard title="Viajes" value={kpis.travels} color="bg-emerald-600" />
+            <KpiCard title="Vehículos" value={kpis.vehicles} color="bg-fuchsia-600" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -92,6 +96,7 @@ const DashboardPage: React.FC = () => {
                 <li>Destinos activos: {(destinationsData?.data ?? []).filter((d: any) => d.active !== false).length}</li>
                 <li>Total rutas: {(routesData?.data ?? []).length}</li>
                 <li>Total viajes: {(travelsData?.data ?? []).length}</li>
+                <li>Total vehículos: {(vehiclesData?.data ?? []).length}</li>
               </ul>
             </div>
           </div>
