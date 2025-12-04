@@ -5,8 +5,8 @@ import { useGetAllDestinationsQuery } from '../../shared/services/destinations.s
 import type { RouteFormModalProps } from '@srtTypes/route.types';
 
 type FormState = {
-  originDestinationId: string | number;
-  finalDestinationId: string | number;
+  originDestinationId: string;
+  finalDestinationId: string;
   distanceKm: string | number;
   estimatedTime: string;
 };
@@ -15,8 +15,8 @@ const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData, onSubmit, 
   const { data: destinationsData } = useGetAllDestinationsQuery({});
   const destinations = (destinationsData?.data ?? []).filter(l => l.active !== false);
   const [form, setForm] = useState<FormState>({
-    originDestinationId: initialData?.originDestinationId ?? '',
-    finalDestinationId: initialData?.finalDestinationId ?? '',
+    originDestinationId: (initialData?.originDestinationId as string) ?? '',
+    finalDestinationId: (initialData?.finalDestinationId as string) ?? '',
     distanceKm: initialData?.distanceKm ?? '',
     estimatedTime: initialData?.estimatedTime ?? '',
   });
@@ -28,8 +28,8 @@ const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData, onSubmit, 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({
-      originDestinationId: Number(form.originDestinationId),
-      finalDestinationId: Number(form.finalDestinationId),
+      originDestinationId: form.originDestinationId,
+      finalDestinationId: form.finalDestinationId,
       distanceKm: Number(form.distanceKm),
       estimatedTime: form.estimatedTime,
     });

@@ -4,28 +4,28 @@ import type { States, CreateStateReq, UpdateStateReq } from '../types/states.typ
 
 export const StatesApi = srtApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllStates: builder.query<SrtResponse<States[]>, { countryId?: number }>({
+    getAllStates: builder.query<SrtResponse<States[]>, { countryId?: string }>({
       query: ({ countryId } = {}) => ({
         url: '/states/all',
         method: 'GET',
         params: countryId ? { countryId } : undefined,
       }),
     }),
-    createState: builder.mutation<SrtResponse<{stateId: number}>, CreateStateReq>({
+    createState: builder.mutation<SrtResponse<{stateId: string}>, CreateStateReq>({
       query: (body) => ({
         url: '/states/create',
         method: 'POST',
         body,
       }),
     }),
-    updateState: builder.mutation<SrtResponse<{stateId: number}>, UpdateStateReq>({
+    updateState: builder.mutation<SrtResponse<{stateId: string}>, UpdateStateReq>({
       query: (body) => ({
         url: '/states/update',
         method: 'PUT',
         body,
       }),
     }),
-    deleteState: builder.mutation<SrtResponse<any>, number>({
+    deleteState: builder.mutation<SrtResponse<any>, string>({
       query: (stateId) => ({
         url: `/states/${stateId}/delete`,
         method: 'DELETE',

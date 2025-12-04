@@ -4,7 +4,7 @@ import type { Country } from '../../shared/types/countries.types';
 
 interface CountryFormModalProps {
   initialData?: Country;
-  onSubmit: (data: { countryName: string; countryId?: number }) => void;
+  onSubmit: (data: { name: string; id?: string }) => void;
   onClose: () => void;
   loading?: boolean;
   isEdit?: boolean;
@@ -16,9 +16,9 @@ const CountryFormModal: React.FC<CountryFormModalProps> = ({ initialData, onSubm
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEdit && initialData) {
-      onSubmit({ countryName, countryId: initialData.id });
+      onSubmit({ name: countryName, id: initialData.id });
     } else {
-      onSubmit({ countryName });
+      onSubmit({ name: countryName });
     }
   };
 

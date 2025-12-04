@@ -1,6 +1,6 @@
 export type RouteFormValues = {
-  originDestinationId: number;
-  finalDestinationId: number;
+  originDestinationId: string;
+  finalDestinationId: string;
   distanceKm: number;
   estimatedTime: string;
 };
@@ -32,9 +32,9 @@ export interface RouteFormModalProps {
 
 export type Route = {
   routeId: number;
-  originDestinationId: number;
+  originDestinationId: string;
   originDestinationName: string;
-  finalDestinationId: number;
+  finalDestinationId: string;
   finalDestinationName: string;
   distanceKm: number;
   estimatedTime: string;

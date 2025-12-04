@@ -8,19 +8,19 @@ import type { Country } from '../shared/types/countries.types';
 export function useStatesAdmin() {
   const { data: countriesData } = useGetAllCountriesQuery();
   const countries: Country[] = (countriesData?.data ?? []).filter(c => c.active !== false);
-  const [selectedCountryId, setSelectedCountryId] = useState<number | ''>('');
+  const [selectedCountryId, setSelectedCountryId] = useState<string | ''>('');
   const { data, isLoading, error, refetch } = useGetAllStatesQuery(selectedCountryId ? { countryId: selectedCountryId } : {});
   const states: States[] = (data?.data ?? []).filter(d => d.active !== false);
   const [showModal, setShowModal] = useState(false);
   const [editState, setEditState] = useState<States | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const [stateToDelete, setStateToDelete] = useState<number | null>(null);
+  const [stateToDelete, setStateToDelete] = useState<string | null>(null);
   const [createState] = useCreateStateMutation();
   const [updateState] = useUpdateStateMutation();
   const [deleteState] = useDeleteStateMutation();
   const [modalLoading, setModalLoading] = useState(false);
   const [stateName, setStateName] = useState('');
-  const [countryId, setCountryId] = useState<number | ''>('');
+  const [countryId, setCountryId] = useState<string | ''>('');
 
   const handleCreate = () => {
     setEditState(null);
@@ -31,12 +31,12 @@ export function useStatesAdmin() {
 
   const handleEdit = (state: States) => {
     setEditState(state);
-    setStateName(state.stateName);
-    setCountryId(state.countryId);
+    setStateName(state.name);
+    setCountryId(String(state.countryId));
     setShowModal(true);
   };
 
-  const handleDelete = (stateId: number) => {
+  const handleDelete = (stateId: string) => {
     setStateToDelete(stateId);
     setConfirmOpen(true);
   };
@@ -45,7 +45,7 @@ export function useStatesAdmin() {
     if (stateToDelete == null) return;
     setConfirmOpen(false);
     try {
-      await deleteState(stateToDelete).unwrap();
+      await deleteState(stateToDelete as string).unwrap();
       toast.success('Departamento eliminado correctamente');
       refetch();
     } catch {
@@ -59,11 +59,11 @@ export function useStatesAdmin() {
     e.preventDefault();
     setModalLoading(true);
     try {
-      if (editState && editState.stateId) {
-        await updateState({ stateId: editState.stateId, stateName, countryId: Number(countryId) }).unwrap();
+      if (editState && editState.id) {
+        await updateState({ id: editState.id, stateName: stateName, countryId: countryId as string }).unwrap();
         toast.success('Departamento actualizado');
       } else {
-        await createState({ stateName, countryId: Number(countryId) }).unwrap();
+        await createState({ stateName: stateName, countryId: countryId as string }).unwrap();
         toast.success('Departamento creado');
       }
       setShowModal(false);

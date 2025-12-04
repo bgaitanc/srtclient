@@ -1,17 +1,17 @@
 export interface States {
-  stateId: number;
-  stateName: string;
-  countryId: number;
+  id: string;
+  name: string;
+  countryId: string;
   active?: boolean;
 }
 
 export interface CreateStateReq {
   stateName: string;
-  countryId: number;
+  countryId: string;
 }
 
 export interface UpdateStateReq {
-  stateId: number;
+  id: string;
   stateName: string;
-  countryId: number;
+  countryId: string;
 }

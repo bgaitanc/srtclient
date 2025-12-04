@@ -1,17 +1,17 @@
 export interface Destination {
-  destinationId: number;
+  destinationId: string;
   destinationName: string;
-  stateId: number;
+  stateId: string;
   active?: boolean;
 }
 
 export interface CreateDestinationReq {
   destinationName: string;
-  stateId: number;
+  stateId: string;
 }
 
 export interface UpdateDestinationReq {
-  destinationId: number;
+  destinationId: string;
   destinationName: string;
-  stateId: number;
+  stateId: string;
 }

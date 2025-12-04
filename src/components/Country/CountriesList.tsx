@@ -4,7 +4,7 @@ import type { Country } from '../../shared/types/countries.types';
 interface CountriesListProps {
   countries: Country[];
   onEdit: (country: Country) => void;
-  onDelete: (countryId: number) => void;
+  onDelete: (countryId: string) => void;
 }
 
 const CountriesList: React.FC<CountriesListProps> = ({ countries, onEdit, onDelete }) => (

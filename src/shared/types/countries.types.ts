@@ -1,5 +1,5 @@
 export interface Country {
-  id: number;
+  id: string;
   name: string;
   active?: boolean;
 }
@@ -9,6 +9,6 @@ export interface CreateCountryReq {
 }
 
 export interface UpdateCountryReq {
-  id: number;
+  id: string;
   name: string;
 }

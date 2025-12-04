@@ -10,21 +10,21 @@ export const countriesApi = srtApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    createCountry: builder.mutation<SrtResponse<{countryId: number}>, CreateCountryReq>({
+    createCountry: builder.mutation<SrtResponse<{countryId: string}>, CreateCountryReq>({
       query: (body) => ({
         url: '/countries/create',
         method: 'POST',
         body,
       }),
     }),
-    updateCountry: builder.mutation<SrtResponse<{countryId: number}>, UpdateCountryReq>({
+    updateCountry: builder.mutation<SrtResponse<{countryId: string}>, UpdateCountryReq>({
       query: (body) => ({
         url: '/countries/update',
         method: 'PUT',
         body,
       }),
     }),
-    deleteCountry: builder.mutation<SrtResponse<any>, number>({
+    deleteCountry: builder.mutation<SrtResponse<any>, string>({
       query: (countryId) => ({
         url: `/countries/${countryId}/delete`,
         method: 'DELETE',

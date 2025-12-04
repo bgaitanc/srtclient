@@ -4,28 +4,28 @@ import type { Destination, CreateDestinationReq, UpdateDestinationReq } from '..
 
 export const destinationsApi = srtApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllDestinations: builder.query<SrtResponse<Destination[]>, { stateId?: number }>({
+    getAllDestinations: builder.query<SrtResponse<Destination[]>, { stateId?: string }>({
       query: ({ stateId } = {}) => ({
         url: '/destinations/all',
         method: 'GET',
         params: stateId ? { stateId } : undefined,
       }),
     }),
-    createDestination: builder.mutation<SrtResponse<{destinationId: number}>, CreateDestinationReq>({
+    createDestination: builder.mutation<SrtResponse<{destinationId: string}>, CreateDestinationReq>({
       query: (body) => ({
         url: '/destinations/create',
         method: 'POST',
         body,
       }),
     }),
-    updateDestination: builder.mutation<SrtResponse<{destinationId: number}>, UpdateDestinationReq>({
+    updateDestination: builder.mutation<SrtResponse<{destinationId: string}>, UpdateDestinationReq>({
       query: (body) => ({
         url: '/destinations/update',
         method: 'PUT',
         body,
       }),
     }),
-    deleteDestination: builder.mutation<SrtResponse<any>, number>({
+    deleteDestination: builder.mutation<SrtResponse<any>, string>({
       query: (destinationId) => ({
         url: `/destinations/${destinationId}/delete`,
         method: 'DELETE',

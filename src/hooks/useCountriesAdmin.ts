@@ -9,7 +9,7 @@ export function useCountriesAdmin() {
   const [showModal, setShowModal] = useState(false);
   const [editCountry, setEditCountry] = useState<Country | undefined>(undefined);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const [countryToDelete, setCountryToDelete] = useState<number | null>(null);
+  const [countryToDelete, setCountryToDelete] = useState<string | null>(null);
   const [modalLoading, setModalLoading] = useState(false);
 
   const handleCreate = () => {
@@ -22,7 +22,7 @@ export function useCountriesAdmin() {
     setShowModal(true);
   };
 
-  const handleDelete = (countryId: number) => {
+  const handleDelete = (countryId: string) => {
     setCountryToDelete(countryId);
     setConfirmOpen(true);
   };
@@ -43,14 +43,14 @@ export function useCountriesAdmin() {
     }
   };
 
-  const handleSubmit = async (data: { countryName: string; countryId?: number }) => {
+  const handleSubmit = async (data: { name: string; id?: string }) => {
     setModalLoading(true);
     try {
-      if (editCountry && data.countryId) {
-        await updateCountry({ countryId: data.countryId, countryName: data.countryName }).unwrap();
+      if (editCountry && data.id) {
+        await updateCountry({ id: data.id, name: data.name }).unwrap();
         showSuccess('País actualizado');
       } else {
-        await createCountry({ countryName: data.countryName }).unwrap();
+        await createCountry({ name: data.name }).unwrap();
         showSuccess('País creado');
       }
       setShowModal(false);
