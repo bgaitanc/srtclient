@@ -14,6 +14,8 @@ const TravelsAdminPage: React.FC = () => {
     price, setPrice,
     departureDate, setDepartureDate,
     arrivalDate, setArrivalDate,
+    routes, vehicles,
+    drivers,
     handleCreate, handleSubmit,
   } = useTravelsAdmin();
 
@@ -77,41 +79,56 @@ const TravelsAdminPage: React.FC = () => {
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Ruta ID</label>
-              <input
-                type="text"
+              <label className="block text-sm font-medium text-gray-700 mb-1">Ruta</label>
+              <select
                 value={routeId}
                 onChange={e => setRouteId(e.target.value)}
                 className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="GUID de ruta"
                 required
                 disabled={modalLoading}
-              />
+              >
+                <option value="" disabled>Selecciona una ruta</option>
+                {routes.map(r => (
+                  <option key={r.routeId} value={r.routeId}>
+                    {r.originDestinationName} → {r.finalDestinationName} ({r.distanceInKm} km)
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Vehículo ID</label>
-                <input
-                  type="text"
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vehículo</label>
+                <select
                   value={vehicleId}
                   onChange={e => setVehicleId(e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  placeholder="GUID de vehículo"
                   required
                   disabled={modalLoading}
-                />
+                >
+                  <option value="" disabled>Selecciona un vehículo</option>
+                  {vehicles.map(v => (
+                    <option key={v.vehicleId} value={v.vehicleId}>
+                      {v.registrationPlate} ({v.model})
+                    </option>
+                  ))}
+                </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Conductor ID</label>
-                <input
-                  type="text"
+                <label className="block text-sm font-medium text-gray-700 mb-1">Conductor</label>
+                <select
                   value={driverId}
                   onChange={e => setDriverId(e.target.value)}
                   className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  placeholder="GUID de conductor"
                   required
                   disabled={modalLoading}
-                />
+                >
+                  <option value="" disabled>Selecciona un conductor</option>
+                  {drivers.map((d: any) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name} {d.surname}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">

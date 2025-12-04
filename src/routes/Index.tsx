@@ -7,6 +7,8 @@ import CountriesAdminPage from '../pages/Countries/CountriesAdminPage';
 import DestinationsAdminPage from '../pages/Destinations/DestinationAdminPage';
 import VehiclesAdminPage from '../pages/Vehicles/VehiclesAdminPage';
 import TravelsAdminPage from '../pages/Travels/TravelsAdminPage';
+import RolesAdminPage from '../pages/Roles/RolesAdminPage';
+import UsersAdminPage from '../pages/Users/UsersAdminPage';
 import DashboardPage from '../pages/Dashboard/DashboardPage';
 import NotFoundPage from '../pages/NotFound/NotFoundPage';
 import RouteGuard from './RouteGuard';
@@ -45,6 +47,12 @@ const AppRoutes: React.FC = () => {
         </Route>
         <Route path="/travels" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
           <Route index element={<TravelsAdminPage />} />
+        </Route>
+        <Route path="/roles" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
+          <Route index element={<RolesAdminPage />} />
+        </Route>
+        <Route path="/users" element={<RouteGuard type="protected"><AdminLayout /></RouteGuard>}>
+          <Route index element={<UsersAdminPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

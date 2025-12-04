@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Route as RouteIcon, Flag, MapPinned, Map, Car, CalendarClock } from 'lucide-react';
+import { LayoutDashboard, Route as RouteIcon, Flag, MapPinned, Map, Car, CalendarClock, Shield, Users } from 'lucide-react';
 
 const AdminSidebar: React.FC = () => {
   const linkBase = 'flex items-center gap-2 px-4 py-2 rounded-lg transition-colors';
@@ -37,6 +37,14 @@ const AdminSidebar: React.FC = () => {
         <NavLink to="/travels" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
           <CalendarClock size={18} />
           <span>Viajes</span>
+        </NavLink>
+        <NavLink to="/roles" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
+          <Shield size={18} />
+          <span>Roles</span>
+        </NavLink>
+        <NavLink to="/users" className={({ isActive }) => `${linkBase} ${isActive ? active : inactive}`}>
+          <Users size={18} />
+          <span>Usuarios</span>
         </NavLink>
       </nav>
     </aside>

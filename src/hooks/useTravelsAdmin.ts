@@ -1,11 +1,23 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useGetAllTravelsQuery, useCreateTravelMutation } from '../shared/services/travels.service';
 import { toast } from 'react-hot-toast';
 import type { Travel } from '../shared/types/travels.types';
+import { useGetAllRoutesQuery } from '../shared/services/routes.service';
+import { useGetAllVehiclesQuery } from '../shared/services/vehicles.service';
+import { useGetAllUsersQuery } from '../shared/services/users.service';
 
 export function useTravelsAdmin() {
   const { data, isLoading, error, refetch } = useGetAllTravelsQuery();
   const travels: Travel[] = data?.data ?? [];
+  const { data: routesResp } = useGetAllRoutesQuery();
+  const { data: vehiclesResp } = useGetAllVehiclesQuery();
+  const { data: usersResp } = useGetAllUsersQuery();
+  const routes = useMemo(() => routesResp?.data ?? [], [routesResp]);
+  const vehicles = useMemo(() => vehiclesResp?.data ?? [], [vehiclesResp]);
+  const drivers = useMemo(() => {
+    const list = usersResp?.data ?? [];
+    return list.filter((u: any) => Array.isArray(u.roles) && u.roles.includes('Conductor'));
+  }, [usersResp]);
   const [showModal, setShowModal] = useState(false);
   const [createTravel] = useCreateTravelMutation();
   const [modalLoading, setModalLoading] = useState(false);
@@ -67,6 +79,8 @@ export function useTravelsAdmin() {
     departureDate, setDepartureDate,
     arrivalDate, setArrivalDate,
     modalLoading, setModalLoading,
+    routes, vehicles,
+    drivers,
     handleCreate, handleSubmit,
   };
 }
