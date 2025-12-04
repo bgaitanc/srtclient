@@ -26,7 +26,7 @@ const TravelDetailModal: React.FC<TravelDetailModalProps> = ({
         </div>
         <div>
           <span className="font-bold text-blue-700">Distancia:</span>{' '}
-          {travel.route.distanceKm} km
+          {travel.route.distanceInKm} km
         </div>
         <div>
           <span className="font-bold text-blue-700">Tiempo estimado:</span>{' '}
@@ -51,7 +51,7 @@ const TravelDetailModal: React.FC<TravelDetailModalProps> = ({
         </div>
         <div>
           <span className="font-semibold">Vehículo:</span>{' '}
-          {`(${travel.vehicle.licensePlate}) ${travel.vehicle.model}`}
+          {`(${travel.vehicle.registrationPlate}) ${travel.vehicle.model}`}
         </div>
         <div>
           <span className="font-semibold">Métodos de pago:</span> Efectivo,

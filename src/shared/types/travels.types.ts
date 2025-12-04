@@ -1,27 +1,26 @@
 export interface Travel {
-  travelId: number;
-  routeId: number;
-  vehicleId: number;
-  driverId: number;
+  travelId: string;
+  routeId: string;
+  vehicleId: string;
+  driverId: string;
   price: number;
-  departureDate: Date;
-  arrivalDate: Date;
-  statusId: number;
+  departureDate: string; // ISO
+  arrivalDate: string; // ISO
+  status?: string;
   route: RouteInfo;
   vehicle: VehicleInfo;
   driver: DriverInfo;
-  status: string;
 }
 
 export interface RouteInfo {
   originDestination: string;
   finalDestination: string;
-  distanceKm: number;
-  estimatedTime: string;
+  distanceInKm: number;
+  estimatedTime: string; // HH:MM:SS
 }
 
 export interface VehicleInfo {
-  licensePlate: string;
+  registrationPlate: string;
   model: string;
   capacity: number;
 }
@@ -42,10 +41,11 @@ export interface TravelDetailModalProps {
   onSubmit: () => void;
 }
 
-export interface TravelFormModalProps {
-  initialData: Travel;
-  onSubmit: (data: Travel) => void;
-  onClose: () => void;
-  loading: boolean;
-  isEdit: boolean;
+export type CreateTravelReq = {
+  routeId: string;
+  vehicleId: string;
+  driverId: string;
+  price: number;
+  departureDate: string;
+  arrivalDate: string;
 }
