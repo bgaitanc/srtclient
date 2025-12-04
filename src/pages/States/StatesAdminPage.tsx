@@ -39,7 +39,7 @@ const StatesAdminPage: React.FC = () => {
           >
             <option value="">Todos</option>
             {countries.map(country => (
-              <option key={country.countryId} value={country.countryId}>{country.countryName}</option>
+              <option key={country.id} value={country.id}>{country.name}</option>
             ))}
           </select>
         </div>
@@ -53,7 +53,7 @@ const StatesAdminPage: React.FC = () => {
           <div key={state.stateId} className="relative group bg-white rounded-3xl shadow-xl p-8 flex flex-col h-full border border-blue-100">
             <div className="flex flex-col items-center justify-center flex-1">
               <span className="text-xl font-extrabold text-blue-700 mb-2">{state.stateName}</span>
-              <span className="text-sm text-gray-500">{countries.find(c => c.countryId === state.countryId)?.countryName}</span>
+              <span className="text-sm text-gray-500">{countries.find(c => c.id === state.countryId)?.name}</span>
             </div>
             <div className="mt-auto w-full flex justify-center gap-4">
               <button
@@ -96,7 +96,7 @@ const StatesAdminPage: React.FC = () => {
               >
                 <option value="">Selecciona un país</option>
                 {countries.map(country => (
-                  <option key={country.countryId} value={country.countryId}>{country.countryName}</option>
+                  <option key={country.id} value={country.id}>{country.name}</option>
                 ))}
               </select>
             </div>

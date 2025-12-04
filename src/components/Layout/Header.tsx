@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         {isAuthenticated && (
           <button
             onClick={logout}
-            className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 cursor-pointer"
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 cursor-pointer"
           >
             Cerrar sesión
           </button>

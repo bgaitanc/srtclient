@@ -1,14 +1,14 @@
 export interface Country {
-  countryId: number;
-  countryName: string;
+  id: number;
+  name: string;
   active?: boolean;
 }
 
 export interface CreateCountryReq {
-  countryName: string;
+  name: string;
 }
 
 export interface UpdateCountryReq {
-  countryId: number;
-  countryName: string;
+  id: number;
+  name: string;
 }
