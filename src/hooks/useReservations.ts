@@ -3,9 +3,9 @@ import {
   usePostReservationMutation,
 } from '@services/reservations.service.ts';
 
-export const useReservations = ({ viajeId }: { viajeId: number }) => {
-  const query = useGetReservationDetailsQuery(viajeId, {
-    skip: !viajeId,
+export const useReservations = ({ travelId }: { travelId: number }) => {
+  const query = useGetReservationDetailsQuery(travelId, {
+    skip: !travelId,
     refetchOnMountOrArgChange: true,
   });
 

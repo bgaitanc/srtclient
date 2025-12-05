@@ -10,21 +10,21 @@ const TravelCard: React.FC<TravelCardProps> = ({ travel, onReserve }) => {
       <div className="flex flex-col items-center justify-center flex-1">
         <div className="flex items-center justify-center gap-4 mb-6 mt-2">
           <span className="text-xl font-extrabold text-blue-700 drop-shadow">
-            Fecha: {dayjs(travel.fechaHoraSalida).format(SrtFormats.DATE_SHORT)}
+            Fecha: {dayjs(travel.departureDate).format(SrtFormats.DATE_SHORT)}
           </span>
         </div>
         <div className="flex items-center justify-center gap-4 mb-6 mt-2">
           <span className="text-md font-extrabold text-blue-700 drop-shadow">
-            Precio: {`C$ ${travel.costo}`}
+            Precio: {`C$ ${travel.price.toFixed(2)}`}
           </span>
         </div>
         <div className="flex items-center justify-center gap-4 mb-6 mt-2">
           <span className="text-xl font-extrabold text-blue-700 drop-shadow">
-            {travel.ruta.locacionOrigen}
+            {travel.route.originDestination}
           </span>
           <span className="mx-2 text-blue-400 text-4xl">→</span>
           <span className="text-xl font-extrabold text-blue-700 drop-shadow">
-            {travel.ruta.locacionDestino}
+            {travel.route.finalDestination}
           </span>
         </div>
         <div className="flex flex-row justify-center gap-8 text-lg text-gray-700 mb-8">
@@ -43,7 +43,7 @@ const TravelCard: React.FC<TravelCardProps> = ({ travel, onReserve }) => {
               />
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 7v10" />
             </svg>
-            {travel.ruta.distanciaKM} km
+            {travel.route.distanceKm} km
           </span>
           <span className="flex items-center gap-2 bg-blue-50 rounded-lg px-3 py-1 shadow-sm">
             <svg
@@ -60,7 +60,7 @@ const TravelCard: React.FC<TravelCardProps> = ({ travel, onReserve }) => {
               />
               <circle cx="12" cy="12" r="10" />
             </svg>
-            {travel.ruta.tiempoEstimado.replace(
+            {travel.route.estimatedTime.replace(
               /^(\d{2}):(\d{2}):(\d{2})$/,
               '$1h $2m'
             )}

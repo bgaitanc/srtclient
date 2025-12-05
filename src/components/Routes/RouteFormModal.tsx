@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import BaseModal from '../../components/shared/BaseModal';
-import { useGetAllLocacionesQuery } from '../../shared/services/locaciones.service';
+import { useGetAllDestinationsQuery } from '../../shared/services/destinations.service';
 
 import type { RouteFormModalProps } from '@srtTypes/route.types';
 
-const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData = {}, onSubmit, onClose, loading, isEdit }) => {
-  const { data: locacionesData } = useGetAllLocacionesQuery({});
-  const locaciones = (locacionesData?.data ?? []).filter(l => l.activo !== false);
-  const [form, setForm] = useState({
-    locacionOrigenId: initialData.locacionOrigenId || '',
-    locacionDestinoId: initialData.locacionDestinoId || '',
-    distanciaKm: initialData.distanciaKm || '',
-    tiempoEstimado: initialData.tiempoEstimado || '',
+type FormState = {
+  originDestinationId: string;
+  finalDestinationId: string;
+  distanceKm: string | number;
+  estimatedTime: string;
+};
+
+const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData, onSubmit, onClose, loading, isEdit }) => {
+  const { data: destinationsData } = useGetAllDestinationsQuery({});
+  const destinations = (destinationsData?.data ?? []).filter(l => l.active !== false);
+  const [form, setForm] = useState<FormState>({
+    originDestinationId: (initialData?.originDestinationId as string) ?? '',
+    finalDestinationId: (initialData?.finalDestinationId as string) ?? '',
+    distanceKm: initialData?.distanceKm ?? '',
+    estimatedTime: initialData?.estimatedTime ?? '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -21,10 +28,10 @@ const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData = {}, onSub
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({
-      locacionOrigenId: Number(form.locacionOrigenId),
-      locacionDestinoId: Number(form.locacionDestinoId),
-      distanciaKm: Number(form.distanciaKm),
-      tiempoEstimado: form.tiempoEstimado,
+      originDestinationId: form.originDestinationId,
+      finalDestinationId: form.finalDestinationId,
+      distanceKm: Number(form.distanceKm),
+      estimatedTime: form.estimatedTime,
     });
   };
 
@@ -35,30 +42,30 @@ const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData = {}, onSub
         <div>
           <label className="block text-sm font-semibold mb-1">Origen</label>
           <select
-            name="locacionOrigenId"
-            value={form.locacionOrigenId}
+            name="originDestinationId"
+            value={form.originDestinationId}
             onChange={handleChange}
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
             required
           >
             <option value="">Selecciona una locación</option>
-            {locaciones.map(loc => (
-              <option key={loc.locacionId} value={loc.locacionId}>{loc.locacionName}</option>
+            {destinations.map(loc => (
+              <option key={loc.destinationId} value={loc.destinationId}>{loc.destinationName}</option>
             ))}
           </select>
         </div>
         <div>
           <label className="block text-sm font-semibold mb-1">Destino</label>
           <select
-            name="locacionDestinoId"
-            value={form.locacionDestinoId}
+            name="finalDestinationId"
+            value={form.finalDestinationId}
             onChange={handleChange}
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
             required
           >
             <option value="">Selecciona una locación</option>
-            {locaciones.map(loc => (
-              <option key={loc.locacionId} value={loc.locacionId}>{loc.locacionName}</option>
+            {destinations.map(loc => (
+              <option key={loc.destinationId} value={loc.destinationId}>{loc.destinationName}</option>
             ))}
           </select>
         </div>
@@ -66,8 +73,8 @@ const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData = {}, onSub
           <label className="block text-sm font-semibold mb-1">Distancia (km)</label>
           <input
             type="number"
-            name="distanciaKm"
-            value={form.distanciaKm}
+            name="distanceKm"
+            value={form.distanceKm}
             onChange={handleChange}
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
             required
@@ -77,8 +84,8 @@ const RouteFormModal: React.FC<RouteFormModalProps> = ({ initialData = {}, onSub
           <label className="block text-sm font-semibold mb-1">Tiempo estimado (hh:mm:ss)</label>
           <input
             type="text"
-            name="tiempoEstimado"
-            value={form.tiempoEstimado}
+            name="estimatedTime"
+            value={form.estimatedTime}
             onChange={handleChange}
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
             required

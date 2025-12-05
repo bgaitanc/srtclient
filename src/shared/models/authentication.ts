@@ -1,21 +1,22 @@
 import type { JwtPayload } from 'jwt-decode';
 
 export type UserLoginReq = {
-  User: string;
+  Username: string;
   Password: string;
 };
 
 export type UserLoginRes = {
   token: string;
+  refreshToken: string;
 };
 
 export type UserRegisterReq = {
-  nombres: string;
-  apellidos: string;
-  usuario: string;
-  contrasena: string;
-  correo: string;
-  telefono: string;
+  Name: string;
+  Surname: string;
+  Username: string;
+  Password: string;
+  Email: string;
+  PhoneNumber: string;
 };
 
 export type UserRegisterRes = {
@@ -27,4 +28,9 @@ export type CustomJwtPayload = JwtPayload & {
   unique_name: string;
   nameid: number;
   roles: string;
+};
+
+export type RefreshTokenReq = {
+  AccessToken: string;
+  RefreshToken: string;
 };

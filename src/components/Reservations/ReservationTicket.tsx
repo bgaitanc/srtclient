@@ -16,47 +16,47 @@ const ReservationTicket: React.FC<{
       maxWidth="max-w-lg"
     >
       <h2 className="text-3xl font-extrabold text-blue-800 mb-6 text-center drop-shadow">
-        {`Ticket # ${data.reservaId}`}
+        {`Ticket # ${data.reservationId}`}
       </h2>
       <div className="flex flex-col gap-2 mb-6 text-lg text-gray-700">
         <div>
           <span className="font-bold text-blue-700">Fecha de Reserva:</span>{' '}
-          {dayjs(data.fechaReserva).format(SrtFormats.DATE_TIME_SHORT)}
+          {dayjs(data.reservationDate).format(SrtFormats.DATE_TIME_SHORT)}
         </div>
         <div>
           <span className="font-bold text-blue-700">Origen:</span>{' '}
-          {data.ruta.locacionOrigen}
+          {data.route.originLocation}
         </div>
         <div>
           <span className="font-bold text-blue-700">Destino:</span>{' '}
-          {data.ruta.locacionDestino}
+          {data.route.destinationLocation}
         </div>
         <div>
           <span className="font-bold text-blue-700">Distancia:</span>{' '}
-          {data.ruta.distanciaKM} km
+          {data.route.distanceKM} km
         </div>
         <div>
           <span className="font-bold text-blue-700">Tiempo estimado:</span>{' '}
-          {data.ruta.tiempoEstimado.replace(
+          {data.route.estimatedTime.replace(
             /^(d{2}):(d{2}):(d{2})$/,
             '$1h $2m'
           )}
         </div>
         <div>
           <span className="font-bold text-blue-700">Fecha de salida:</span>{' '}
-          {dayjs(data.viaje.fechaHoraSalida).format(SrtFormats.DATE_TIME_SHORT)}
+          {dayjs(data.travel.departureDate).format(SrtFormats.DATE_TIME_SHORT)}
         </div>
         <div>
           <span className="font-bold text-blue-700">
             Fecha de llegada estimada:
           </span>{' '}
-          {dayjs(data.viaje.fechaHoraLlegada).format(
+          {dayjs(data.travel.arrivalDate).format(
             SrtFormats.DATE_TIME_SHORT
           )}
         </div>
         <div>
           <span className="font-bold text-blue-700">Asientos:</span>{' '}
-          {data.detalle.map((x) => x.numeroAsiento).join(', ')}
+          {data.detail.map((x) => x.seatNumber).join(', ')}
         </div>
       </div>
       <button

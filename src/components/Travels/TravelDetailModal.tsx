@@ -18,40 +18,40 @@ const TravelDetailModal: React.FC<TravelDetailModalProps> = ({
       <div className="flex flex-col gap-2 mb-6 text-lg text-gray-700">
         <div>
           <span className="font-bold text-blue-700">Origen:</span>{' '}
-          {travel.ruta.locacionOrigen}
+          {travel.route.originDestination}
         </div>
         <div>
           <span className="font-bold text-blue-700">Destino:</span>{' '}
-          {travel.ruta.locacionDestino}
+          {travel.route.finalDestination}
         </div>
         <div>
           <span className="font-bold text-blue-700">Distancia:</span>{' '}
-          {travel.ruta.distanciaKM} km
+          {travel.route.distanceInKm} km
         </div>
         <div>
           <span className="font-bold text-blue-700">Tiempo estimado:</span>{' '}
-          {travel.ruta.tiempoEstimado.replace(
-            /^(d{2}):(d{2}):(d{2})$/,
+          {travel.route.estimatedTime.replace(
+            /^(\d{2}):(\d{2}):(\d{2})$/,
             '$1h $2m'
           )}
         </div>
         <div>
           <span className="font-bold text-blue-700">Fecha de salida:</span>{' '}
-          {dayjs(travel.fechaHoraSalida).format(SrtFormats.DATE_TIME_SHORT)}
+          {dayjs(travel.departureDate).format(SrtFormats.DATE_TIME_SHORT)}
         </div>
         <div>
           <span className="font-bold text-blue-700">Fecha de llegada estimada:</span>{' '}
-          {dayjs(travel.fechaHoraLlegada).format(SrtFormats.DATE_TIME_SHORT)}
+          {dayjs(travel.arrivalDate).format(SrtFormats.DATE_TIME_SHORT)}
         </div>
       </div>
       <div className="flex flex-col gap-2 mb-6 text-base text-gray-600">
         <div>
           <span className="font-semibold">Chofer:</span>{' '}
-          {`${travel.conductor.nombres} ${travel.conductor.apellidos}`}
+          {`${travel.driver.name} ${travel.driver.surname}`}
         </div>
         <div>
           <span className="font-semibold">Vehículo:</span>{' '}
-          {`(${travel.vehiculo.placa}) ${travel.vehiculo.modelo}`}
+          {`(${travel.vehicle.registrationPlate}) ${travel.vehicle.model}`}
         </div>
         <div>
           <span className="font-semibold">Métodos de pago:</span> Efectivo,

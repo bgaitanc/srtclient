@@ -15,10 +15,10 @@ const RouteDetailModal: React.FC<RouteDetailModalProps> = ({ route, onClose }) =
         </button>
         <h2 className="text-3xl font-extrabold text-blue-800 mb-6 text-center drop-shadow">Reserva tu viaje</h2>
         <div className="flex flex-col gap-2 mb-6 text-lg text-gray-700">
-          <div><span className="font-bold text-blue-700">Origen:</span> {route.origen}</div>
-          <div><span className="font-bold text-blue-700">Destino:</span> {route.destino}</div>
-          <div><span className="font-bold text-blue-700">Distancia:</span> {route.distanciaKm} km</div>
-          <div><span className="font-bold text-blue-700">Tiempo estimado:</span> {route.tiempoEstimado.replace(/^(\d{2}):(\d{2}):(\d{2})$/, '$1h $2m')}</div>
+          <div><span className="font-bold text-blue-700">Origen:</span> {route.origin}</div>
+          <div><span className="font-bold text-blue-700">Destino:</span> {route.destination}</div>
+          <div><span className="font-bold text-blue-700">Distancia:</span> {route.distanceKm} km</div>
+          <div><span className="font-bold text-blue-700">Tiempo estimado:</span> {route.estimatedTime.replace(/^(\d{2}):(\d{2}):(\d{2})$/, '$1h $2m')}</div>
         </div>
         <div className="flex flex-col gap-2 mb-6 text-base text-gray-600">
           <div><span className="font-semibold">Chofer:</span> Juan Pérez</div>
