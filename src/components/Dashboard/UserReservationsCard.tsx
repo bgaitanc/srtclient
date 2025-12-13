@@ -41,7 +41,7 @@ const UserReservationsCard: React.FC<UserReservationsCardProps> = ({
       width: 150,
       align: 'center',
       headerAlign: 'center',
-      renderCell: (cell) => <span>{cell.row.ruta.locacionOrigen}</span>,
+      renderCell: (cell) => <span>{cell.row.route.originLocation}</span>,
     },
     {
       field: 'destino',
@@ -49,7 +49,7 @@ const UserReservationsCard: React.FC<UserReservationsCardProps> = ({
       width: 150,
       align: 'center',
       headerAlign: 'center',
-      renderCell: (cell) => <span>{cell.row.ruta.locacionDestino}</span>,
+      renderCell: (cell) => <span>{cell.row.route.destinationLocation}</span>,
     },
     {
       field: 'distancia',
@@ -57,7 +57,7 @@ const UserReservationsCard: React.FC<UserReservationsCardProps> = ({
       width: 150,
       align: 'center',
       headerAlign: 'center',
-      renderCell: (cell) => <span>{cell.row.ruta.distanciaKM} KM</span>,
+      renderCell: (cell) => <span>{cell.row.route.distanceKM} KM</span>,
     },
     {
       field: 'fechaSalida',
@@ -67,7 +67,7 @@ const UserReservationsCard: React.FC<UserReservationsCardProps> = ({
       headerAlign: 'center',
       renderCell: (cell) => (
         <span>
-          {dayjs(cell.row.viaje.fechaHoraSalida).format(
+          {dayjs(cell.row.travel.departureDate).format(
             SrtFormats.DATE_TIME_SHORT
           )}
         </span>
@@ -81,7 +81,7 @@ const UserReservationsCard: React.FC<UserReservationsCardProps> = ({
       headerAlign: 'center',
       renderCell: (cell) => (
         <span>
-          {dayjs(cell.row.viaje.fechaHoraLlegada).format(
+          {dayjs(cell.row.travel.arrivalDate).format(
             SrtFormats.DATE_TIME_SHORT
           )}
         </span>
@@ -132,7 +132,7 @@ const UserReservationsCard: React.FC<UserReservationsCardProps> = ({
             <DataGrid
               columns={columns}
               rows={reservationsData}
-              getRowId={(row) => row.reservaId}
+              getRowId={(row) => row.reservationId}
 
             />
           </Box>

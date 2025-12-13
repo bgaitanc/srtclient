@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import type { UserInfo } from '@srtTypes/users.types.ts';
+import type { UserInfoResponse } from '@srtTypes/users.types.ts';
 
 interface UserInfoCardProps {
-  userData?: UserInfo;
+  userData?: UserInfoResponse;
 }
 
 const UserInfoCard: React.FC<UserInfoCardProps> = ({ userData }) => {
@@ -18,27 +18,27 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ userData }) => {
           <Box className="grid grid-cols-3 gap-6">
             <p className="text-left text-lg text-blue-700 font-bold">Usuario</p>
             <p className="text-left text-lg text-gray-600 col-span-2">
-              {userData!.usuario}
+              {userData!.username}
             </p>
             <p className="text-left text-lg text-blue-700 font-bold">Nombres</p>
             <p className="text-left text-lg text-gray-600 col-span-2">
-              {userData!.nombres}
+              {userData!.name}
             </p>
             <p className="text-left text-lg text-blue-700 font-bold">
               Apellidos
             </p>
             <p className="text-left text-lg text-gray-600 col-span-2">
-              {userData!.apellidos}
+              {userData!.surname}
             </p>
             <p className="text-left text-lg text-blue-700 font-bold">Correo</p>
             <p className="text-left text-lg text-gray-600 col-span-2">
-              {userData!.correo}
+              {userData!.email}
             </p>
             <p className="text-left text-lg text-blue-700 font-bold">
               Teléfono
             </p>
             <p className="text-left text-lg text-gray-600 col-span-2">
-              {userData!.telefono}
+              {userData!.phoneNumber ? userData!.phoneNumber : 'No proporcionado'}
             </p>
           </Box>
         </Box>

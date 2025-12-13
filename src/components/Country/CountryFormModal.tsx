@@ -11,7 +11,7 @@ interface CountryFormModalProps {
 }
 
 const CountryFormModal: React.FC<CountryFormModalProps> = ({ initialData, onSubmit, onClose, loading, isEdit }) => {
-  const [countryName, setCountryName] = useState(initialData?.name ?? '');
+  const [countryName, setCountryName] = useState(initialData?.countryName ?? '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

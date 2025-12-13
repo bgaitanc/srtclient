@@ -22,7 +22,7 @@ const CountriesList: React.FC<CountriesListProps> = ({ countries, onEdit, onDele
           {countries.map((country) => (
             <tr key={country.id} className="border-t border-blue-100 hover:bg-blue-50/40">
               <td className="px-4 py-3 text-sm text-gray-700">{country.id}</td>
-              <td className="px-4 py-3 text-sm font-medium text-gray-900">{country.name}</td>
+              <td className="px-4 py-3 text-sm font-medium text-gray-900">{country.countryName}</td>
               <td className="px-4 py-3 text-sm text-right">
                 <div className="inline-flex gap-2">
                   <button
