@@ -18,7 +18,7 @@ const CountriesAdminPage: React.FC = () => {
     const q = search.trim().toLowerCase();
     if (!q) return countries;
     return countries.filter(c => {
-      const name = (c.name ?? '').toLowerCase();
+      const name = (c.countryName ?? '').toLowerCase();
       const idStr = String(c.id ?? '').toLowerCase();
       return name.includes(q) || idStr.includes(q);
     });

@@ -47,10 +47,10 @@ export function useCountriesAdmin() {
     setModalLoading(true);
     try {
       if (editCountry && data.id) {
-        await updateCountry({ id: data.id, name: data.name }).unwrap();
+        await updateCountry({ id: data.id, countryName: data.name }).unwrap();
         showSuccess('País actualizado');
       } else {
-        await createCountry({ name: data.name }).unwrap();
+        await createCountry({ countryName: data.name }).unwrap();
         showSuccess('País creado');
       }
       setShowModal(false);
