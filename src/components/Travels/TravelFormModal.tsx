@@ -3,21 +3,30 @@ import React, { useState } from 'react';
 import type { Travel, TravelFormModalProps } from '@srtTypes/travels.types.ts';
 
 const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit, onClose, loading, isEdit }) => {
-  //TODO esto debería ser viaje
   const [form, setForm] = useState({
     originDestination: initialData.route.originDestination,
     finalDestination: initialData.route.finalDestination,
-    distanceKm: initialData.route.distanceKm,
+    distanceInKm: initialData.route.distanceInKm,
     estimatedTime: initialData.route.estimatedTime,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: name === 'distanceInKm' ? Number(value) : value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({} as Travel);
+    onSubmit({
+      ...initialData,
+      route: {
+        ...initialData.route,
+        ...form,
+      },
+    } as Travel);
   };
 
   return (
@@ -32,10 +41,10 @@ const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit
         <h2 className="text-2xl font-bold text-blue-700 mb-4">{isEdit ? 'Editar ruta' : 'Nueva ruta'}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-semibold mb-1">Origen (ID)</label>
+            <label className="block text-sm font-semibold mb-1">Origen</label>
             <input
-              type="number"
-              name="originDestinationId"
+              type="text"
+              name="originDestination"
               value={form.originDestination}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
@@ -43,10 +52,10 @@ const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold mb-1">Destino (ID)</label>
+            <label className="block text-sm font-semibold mb-1">Destino</label>
             <input
-              type="number"
-              name="finalDestinationId"
+              type="text"
+              name="finalDestination"
               value={form.finalDestination}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
@@ -57,8 +66,8 @@ const TravelFormModal: React.FC<TravelFormModalProps> = ({ initialData, onSubmit
             <label className="block text-sm font-semibold mb-1">Distancia (km)</label>
             <input
               type="number"
-              name="distanceKm"
-              value={form.distanceKm}
+              name="distanceInKm"
+              value={form.distanceInKm}
               onChange={handleChange}
               className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
               required

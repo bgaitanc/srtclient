@@ -41,6 +41,14 @@ export interface TravelDetailModalProps {
   onSubmit: () => void;
 }
 
+export interface TravelFormModalProps {
+  initialData: Travel;
+  onSubmit: (travel: Travel) => void;
+  onClose: () => void;
+  loading?: boolean;
+  isEdit?: boolean;
+}
+
 export type CreateTravelReq = {
   routeId: string;
   vehicleId: string;

@@ -64,7 +64,7 @@ const StatesAdminPage: React.FC = () => {
             >
               <option value="">Todos</option>
               {countries.map(country => (
-                  <option key={country.id} value={String(country.id)}>{country.name}</option>
+                  <option key={country.id} value={String(country.id)}>{country.countryName}</option>
               ))}
             </select>
           </div>
@@ -89,7 +89,7 @@ const StatesAdminPage: React.FC = () => {
                   <tr key={state.id} className="border-t border-blue-100 hover:bg-blue-50/40">
                     <td className="px-4 py-3 text-sm text-gray-700">{state.id}</td>
                     <td className="px-4 py-3 text-sm font-medium text-gray-900">{state.name}</td>
-                    <td className="px-4 py-3 text-sm text-gray-700">{countries.find(c => c.id === state.countryId)?.name}</td>
+                    <td className="px-4 py-3 text-sm text-gray-700">{countries.find(c => c.id === state.countryId)?.countryName}</td>
                     <td className="px-4 py-3 text-sm text-right">
                       <div className="inline-flex gap-2">
                         <button
@@ -151,7 +151,7 @@ const StatesAdminPage: React.FC = () => {
               >
                 <option value="">Selecciona un país</option>
                 {countries.map(country => (
-                  <option key={country.id} value={String(country.id)}>{country.name}</option>
+                  <option key={country.id} value={String(country.id)}>{country.countryName}</option>
                 ))}
               </select>
             </div>

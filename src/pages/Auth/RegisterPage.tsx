@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import AuthForm from '@components/Auth/AuthForm';
 import type { AuthFormField } from '@components/Auth/AuthForm';
 import UserIcon from '@assets/icons/UserIcon';
+import type { UserRegisterReq } from '@models/authentication.ts';
 
 const RegisterPage: React.FC = () => {
   const { registerUser, isLoading, isSuccess } = useRegisterUser();
@@ -55,13 +56,13 @@ const RegisterPage: React.FC = () => {
       if (Object.keys(errors).length > 0) {
         return;
       }
-      const registerPayload = {
-        nombres: values.name,
-        apellidos: values.lastName,
-        usuario: values.username,
-        contrasena: values.password,
-        correo: values.email,
-        telefono: values.phone,
+      const registerPayload: UserRegisterReq = {
+        Name: values.name,
+        Surname: values.lastName,
+        Username: values.username,
+        Password: values.password,
+        Email: values.email,
+        PhoneNumber: values.phone,
       };
       try {
         await registerUser(registerPayload);

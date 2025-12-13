@@ -43,7 +43,7 @@ const TravelCard: React.FC<TravelCardProps> = ({ travel, onReserve }) => {
               />
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 7v10" />
             </svg>
-            {travel.route.distanceKm} km
+            {travel.route.distanceInKm} km
           </span>
           <span className="flex items-center gap-2 bg-blue-50 rounded-lg px-3 py-1 shadow-sm">
             <svg

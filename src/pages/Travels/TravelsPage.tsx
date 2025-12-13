@@ -72,7 +72,7 @@ const TravelsPage: React.FC = () => {
       )}
       {showTravelReservation && selectedTravel && (
         <TravelReservationForm
-          travelId={selectedTravel.travelId}
+          travelId={Number(selectedTravel.travelId)}
           onCancel={cancelTravelReservation}
           setShowReservationTicket={setShowReservationTicket}
           setCreatedReservation={setCreatedReservation}
